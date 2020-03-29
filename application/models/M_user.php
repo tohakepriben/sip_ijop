@@ -34,12 +34,8 @@ class M_user extends CI_Model {
 	}
 
 	function update_log($email){
-		$arr_data=array(
-			'last_login'	=> date('Y-m-d H:i:s')
-		);
-		$arr_where=array(
-			'email'			=> $email
-		);		
+		$arr_data=array('last_login' => date('Y-m-d H:i:s'));
+		$arr_where=array('email' => $email);		
 		return $this->db->update('tbl_user', $arr_data, $arr_where);
 	}
 	
@@ -54,35 +50,38 @@ class M_user extends CI_Model {
 	}
 
 	function tambah(){
-		if($this->email_exists($this->input->post('email'))){
-			return 'email exists';
-		}
-		if($this->hp_exists($this->input->post('hp'))){
-			return 'hp exists';
-		}
+		if($this->email_exists($this->input->post('email'))) return 'email exists';
+		if($this->hp_exists($this->input->post('hp'))) return 'hp exists';
 		$array=array(
 			'nama'				=> $this->input->post('nama'),
 			'email'				=> $this->input->post('email'),
 			'hp'				=> $this->input->post('hp')
 		);
-		if($this->db->insert('tbl_user', $array)){
-			return TRUE;
-		}else{
-			return FALSE;
+		if($this->db->insert('tbl_user', $array)){return 1;}else{return 0;
 		}
 	}	
 
-	function update($email){
-		$arr_data=array(
-			'nama'				=> $this->input->post('nama'),
-			'email'				=> $this->input->post('email'),
-			'hp'				=> $this->input->post('hp')
-		);
-
-		$arr_where=array(
-			'email'		=> $email
-		);
+	function ubah($email){
+		$new_email=$this->input->post('email');
+		$new_hp=$this->input->post('hp');
+		$arr_data=array('nama' => $this->input->post('nama'));
 		
-		return $this->db->update('tbl_user', $arr_data, $arr_where);
+		if($new_email!=''){
+			if($new_email!=$email){
+				if($this->email_exists($new_email)) return 'email exists';
+				$arr_new=array('email' => $new_email);
+				$arr_data = array_merge($arr_data, $arr_new);
+			}
+		}
+
+		if($new_hp!=''){
+			if($new_hp!=$this->get_detil($email, 'hp')){
+				if($this->hp_exists($new_hp)) return 'hp exists';
+				$arr_new=array('hp'	=> $new_hp);
+				$arr_data = array_merge($arr_data, $arr_new);
+			}
+		}
+		$arr_where=array('email' => $email);
+		if($this->db->update('tbl_user', $arr_data, $arr_where)){return 'sukses';}else{return 'gagal';}				
 	}
 }

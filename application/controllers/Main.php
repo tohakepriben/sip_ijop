@@ -28,6 +28,7 @@ class Main extends CI_Controller {
 	}
 	
 	function daftar() {
+		if($this->session->has_userdata('level')) redirect(base_url());
 		if($this->input->post('secret')==1){
 			$this->form_validation->set_rules('nama', 'Nama', 'required|trim|min_length[5]', array(
 				'required'		=> 'Tidak boleh kosong',
@@ -48,7 +49,7 @@ class Main extends CI_Controller {
 
 	        if ($this->form_validation->run()){
 	        	$ret=$this->m_user->tambah();
-				if($ret==TRUE){
+				if($ret==1){
 					$this->session->set_flashdata('registrasi_sukses', TRUE);
 					redirect(base_url());
 				}elseif($ret=='email exists'){
@@ -70,29 +71,32 @@ class Main extends CI_Controller {
 		$param['hp_exists'] = '';
 		$param['email_hp_lama_invalid'] = FALSE;
 		if($this->input->post('secret')==1){
-			if($this->input->post('email_lama')==$this->session->userdata('email') &&
-				$this->input->post('hp_lama')==$this->session->userdata('hp')){
+			if($this->input->post('email_lama')=='' || $this->input->post('hp_lama')==''){
+				$param['email_hp_lama_invalid'] = TRUE;
+			}elseif($this->input->post('email_lama')<>$this->session->userdata('email') ||
+				$this->input->post('hp_lama')<>$this->session->userdata('hp')){
 				$param['email_hp_lama_invalid'] = TRUE;
 			}else{
 				$this->form_validation->set_rules('nama', 'Nama', 'required|trim|min_length[5]', array(
 					'required'		=> 'Tidak boleh kosong',
 					'min_length' 	=> 'Minimal 5 karakter'
 					));
-				$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', array(
-					'required'		=> 'Tidak boleh kosong',
+				$this->form_validation->set_rules('email', 'Email', 'trim|valid_email', array(
 					'valid_email' 	=> 'Format email tidak valid'
 					));
-				$this->form_validation->set_rules('hp', 'hp', 'required|trim|numeric|min_length[10]|max_length[13]', array(
-					'required'		=> 'Tidak boleh kosong',
+				$this->form_validation->set_rules('hp', 'hp', 'trim|numeric|min_length[10]|max_length[13]', array(
 					'numeric' 		=> 'Harus angka',
 					'min_length' 	=> 'Minimal 10 digit',
 					'max_length' 	=> 'Maksimal 13 digit'
 					));
 
 		        if ($this->form_validation->run()){
-		        	$ret=$this->m_user->tambah();
-					if($ret==TRUE){
-						$this->session->set_flashdata('registrasi_sukses', TRUE);
+		        	$ret=$this->m_user->ubah($this->session->userdata('email'));
+					if($ret=='sukses'){
+						$this->session->set_userdata('nama', $this->input->post('nama'));
+						if($this->input->post('email')!='') $this->session->set_userdata('email', $this->input->post('email'));
+						if($this->input->post('hp')!='') $this->session->set_userdata('hp', $this->input->post('hp'));
+						$this->session->set_flashdata('update_profil_sukses', TRUE);
 						redirect(base_url());
 					}elseif($ret=='email exists'){
 						$param['email_exists'] = 'Email sudah digunakan oleh pengguna lain';
@@ -107,6 +111,7 @@ class Main extends CI_Controller {
 		}		
 		$param['title'] = 'Profil Saya';
 		$param['sub_title'] = 'Edit Profil';
+		$param['nama'] = $this->session->userdata('nama');
 		$param['last_login'] = $this->m_user->get_detil($this->session->userdata('email'),'last_login');
 		$this->load->view('main', $param);
 	}

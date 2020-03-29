@@ -22,6 +22,7 @@
 
 <?php else: ?>
 <div class="col-md-9">
+<form method="post">
 <table>
 	<tr>
 		<td>
@@ -39,11 +40,12 @@
 			
 		</td>
 		<td>
-			<button id="login" type="button" class="btn btn-primary btn-sm" style="margin-right: 10px;margin-top: -16px;margin-left: 5px;margin-right: 10px;">Login</button> 
+			<a id="login" class="btn btn-primary btn-sm" style="margin-right: 10px;margin-top: -16px;margin-left: 5px;margin-right: 10px;">Login</a> 
 
 		</td>
 	</tr>
 </table>
+</form>
 </div>
 <div class="col-md-3" style="text-align: center;">
 	atau <a href="<?=base_url('daftar')?>" class="btn btn-success btn-sm" style="width: 100px;margin-top: 2px;margin-bottom: 5px;">  Daftar  </a>

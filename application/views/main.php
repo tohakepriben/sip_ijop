@@ -83,7 +83,7 @@ $uri2	= $this->uri->segment(2);
 				$this->load->view('info');
 
 			}elseif($uri1=='profil_saya'){
-				$this->load->view('edit_profil');
+				$this->load->view('profil_saya');
 
 			}else{
 	        	$this->load->view('beranda');
@@ -112,7 +112,16 @@ $uri2	= $this->uri->segment(2);
 	  </div>
 	</div>    
 
+	    
+	<?php if($this->session->userdata('level')==1): ?>
+    <script src="<?=base_url('assets/vendor/datatables/datatables.min.js')?>"></script>
+	<?php endif; ?>
+    
+    <script src="<?=base_url('assets/vendor/bootstrap/js/bootstrap.min.js')?>"></script>
+    <script src="<?=base_url('assets/vendor/metisMenu/metisMenu.min.js')?>"></script>
+    <script src="<?=base_url('assets/dist/js/sb-admin-2.js')?>"></script>
 
+	<?php if($this->session->flashdata('registrasi_sukses')): ?>
 	<div class="modal fade" id="modal-sukses-daftar" tabindex="-1" role="dialog" aria-labelledby="modal-suksesLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -129,7 +138,11 @@ $uri2	= $this->uri->segment(2);
 	    </div>
 	  </div>
 	</div>
-	    
+	<script type="text/javascript">
+		$('#modal-sukses-daftar').modal('show');	
+	</script>
+
+	<?php elseif($this->session->flashdata('login_sukses')): ?>	    
 	<div class="modal fade" id="modal-sukses-login" tabindex="-1" role="dialog" aria-labelledby="modal-suksesLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -146,22 +159,29 @@ $uri2	= $this->uri->segment(2);
 	    </div>
 	  </div>
 	</div>
-	    
-	<?php if($this->session->userdata('level')==1): ?>
-    <script src="<?=base_url('assets/vendor/datatables/datatables.min.js')?>"></script>
-	<?php endif; ?>
-    
-    <script src="<?=base_url('assets/vendor/bootstrap/js/bootstrap.min.js')?>"></script>
-    <script src="<?=base_url('assets/vendor/metisMenu/metisMenu.min.js')?>"></script>
-    <script src="<?=base_url('assets/dist/js/sb-admin-2.js')?>"></script>
-
-	<?php if($this->session->flashdata('registrasi_sukses')): ?>
-	<script type="text/javascript">
-		$('#modal-sukses-daftar').modal('show');	
-	</script>
-	<?php elseif($this->session->flashdata('login_sukses')): ?>
 	<script type="text/javascript">
 		$('#modal-sukses-login').modal('show');	
+	</script>
+
+	<?php elseif($this->session->flashdata('update_profil_sukses')): ?>	    
+	<div class="modal fade" id="modal-sukses-update-profil" tabindex="-1" role="dialog" aria-labelledby="modal-suksesLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="modal-logoutLabel">Update Profil Berhasil</h4>
+	      </div>
+	      <div class="modal-body">
+	        Perubahan profil anda berhasil disimpan
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script type="text/javascript">
+		$('#modal-sukses-update-profil').modal('show');	
 	</script>
 	<?php endif; ?>
 	
