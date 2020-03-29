@@ -7,7 +7,7 @@
             <?=$this->session->userdata('nama')?> <i class="fa fa-user fa-fw"> </i> <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
-            <li><a id="user-profile" href="#"><i class="fa fa-user fa-fw"></i> Profil saya</a>
+            <li><a id="user-profile" href="<?=base_url('profil_saya')?>"><i class="fa fa-user fa-fw"></i> Profil saya</a>
             </li>
             <li class="divider"></li>
             <li>
@@ -27,14 +27,14 @@
 		<td>
 		<div class="form-group input-group" style="margin-right: 5px;">
             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-            <input id="log-email" type="email" class="form-control" placeholder="Email">
+            <input id="log-email" type="email" class="form-control" placeholder="Email" name="username">
         </div>                    	
 			
 		</td>
 		<td>
 		<div class="form-group input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-            <input id="log-hp" type="tel" class="form-control" placeholder="No. HP">
+            <input id="log-hp" type="tel" class="form-control" placeholder="No. HP" name="password">
         </div>                    	                    	
 			
 		</td>

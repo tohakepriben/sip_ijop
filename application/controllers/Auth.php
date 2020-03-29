@@ -7,11 +7,8 @@ class Auth extends CI_Controller {
 		parent::__construct();
 	}
 
-
 	function index(){
-		$level=$this->session->userdata('level');
-		$param['title'] = 'Login';
-		$this->load->view('login', $param);
+		redirect(base_url());
 	}
 
 	function login(){
@@ -22,13 +19,15 @@ class Auth extends CI_Controller {
 				echo 'locked';
 			}else{
 				$new_data = array(
-					'nama'	=> $this->m_user->get_detil_user($email, 'nama'),
-					'level'	=> $this->m_user->get_detil_user($email, 'level'),
-					'email' => $email,
-					'hp'	=> $hp
+					'id_user'	=> $this->m_user->get_detil($email, 'id'),
+					'nama'		=> $this->m_user->get_detil($email, 'nama'),
+					'level'		=> $this->m_user->get_detil($email, 'level'),
+					'email' 	=> $email,
+					'hp'		=> $hp
 				);
 				$this->session->set_userdata($new_data);
 				$this->session->set_flashdata('login_sukses', TRUE);
+				$this->m_user->update_log($email);
 				echo 1;
 			}
 		}else{

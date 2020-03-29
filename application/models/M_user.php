@@ -7,12 +7,12 @@ class M_user extends CI_Model {
 		return $this->db->get_where('tbl_user', 'email="'.$email.'"')->result_array();
 	}
 
-	function get_detil_user($email, $field){
+	function get_detil($email, $field){
 		return $this->db->get_where('tbl_user', 'email="'.$email.'"')->row($field);
 	}
 
 	function get_all(){
-		return $this->db->get('tbl_user')->result_array();
+		return $this->db->get_where('tbl_user', 'level=2')->result_array();
 	}
 
 	function login($email, $hp){
@@ -27,6 +27,22 @@ class M_user extends CI_Model {
 		return $this->db->get_where('tbl_user', 'email="'.$email.'"')->row('locked');
 	}
 
+	function lock($id, $val){
+		$arr_data=array('locked' => $val);
+		$arr_where=array('id' => $id);		
+		return $this->db->update('tbl_user', $arr_data, $arr_where);
+	}
+
+	function update_log($email){
+		$arr_data=array(
+			'last_login'	=> date('Y-m-d H:i:s')
+		);
+		$arr_where=array(
+			'email'			=> $email
+		);		
+		return $this->db->update('tbl_user', $arr_data, $arr_where);
+	}
+	
 	function email_exists($email){
 		$cnt = $this->db->get_where('tbl_user', 'email="'.$email.'"')->num_rows();
 		return $cnt>0;

@@ -6,45 +6,39 @@
                 <a href="<?=base_url()?>"><i class="fa fa-dashboard fa-fw"></i> Beranda</a>
             </li>
             <li>
-                <a href="<?=base_url('alur_pengajuan')?>"><i class="fa fa-tasks fa-fw"></i> Alur Pengajuan</a>
+                <a href="<?=base_url('pengajuan/alur_pengajuan')?>"><i class="fa fa-link fa-fw"></i> Alur Pengajuan</a>
             </li>
             <li>
-                <a href="<?=base_url('download')?>"><i class="fa fa-download fa-fw"></i> Download Instrumen</a>
+                <a href="<?=base_url('download_instrumen')?>"><i class="fa fa-download fa-fw"></i> Download Instrumen</a>
             </li>
 
             <?php if($this->session->userdata('level')==2): ?>
             <li>
-                <a href="#"><i class="fa fa-list fa-fw"></i> Pengajuan Saya<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?=base_url('pengajuan_ijop_baru')?>">Ijop Baru</a>
-                    </li>
-                    <li>
-                        <a href="<?=base_url('pengajuan_ijop_perpanjangan')?>">Ijop Perpanjangan</a>
-                    </li>
-                </ul>
+                <a href="<?=base_url('pengajuan/pengajuan_saya')?>"><i class="fa fa-list fa-fw"></i> Pengajuan Saya</a>
             </li>
             <?php endif; ?>
 
             <?php if($this->session->userdata('level')==1): ?>
             <li>
-                <a href="#"><i class="fa fa-list fa-fw"></i> Data Pengajuan<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?=base_url('pengajuan_ijop_baru')?>">Ijop Baru</a>
-                    </li>
-                    <li>
-                        <a href="<?=base_url('pengajuan_ijop_perpanjangan')?>">Ijop Perpanjangan</a>
-                    </li>
-                </ul>
+                <a href="<?=base_url('admin/data_pengajuan')?>"><i class="fa fa-list fa-fw"></i> Data Pengajuan</a>
             </li>
             <li>
-                <a href="<?=base_url('pengguna')?>"><i class="fa fa-users fa-fw"></i> Data Pengguna</a>
+                <a href="#"><i class="fa fa-wrench fa-fw"></i> Pengaturan<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="<?=base_url('admin/syarat_berkas')?>">Persyaratan Berkas</a>
+                    </li>
+                    <li>
+                        <a href="<?=base_url('admin/pengguna')?>">Pengguna</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
             </li>
+
             <?php endif; ?>
 
             <li>
-                <a href="<?=base_url('tentang')?>"><i class="fa fa-info-circle fa-fw"></i> Tentang SIP Ijop</a>
+                <a href="<?=base_url('info')?>"><i class="fa fa-info-circle fa-fw"></i> Info dan Panduan</a>
             </li>
 
             <?php if($this->session->has_userdata('level')): ?>

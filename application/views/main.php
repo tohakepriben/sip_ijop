@@ -11,17 +11,22 @@ $uri2	= $this->uri->segment(2);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sistem Informasi Permohonan Ijin Operasional Ponpes, MDTA dan TPQ">
+    <meta name="description" content="Sistem Informasi Pelayanan Ijin Operasional Ponpes, MDTA dan TPQ Kab. Brebes">
     <meta name="author" content="Toha Kepriben">
+    <link href="<?=base_url('assets/logo.png')?>" rel="icon" type="image/png" />	
 
-    <title>SIP IJOP Kab. Brebes</title>
+    <title>SIP IJOP Brebes</title>
 
-    <link href="<?=base_url('assets/vendor/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet">
-    <link href="<?=base_url('assets/vendor/metisMenu/metisMenu.min.css')?>" rel="stylesheet">
-    <link href="<?=base_url('assets/dist/css/sb-admin-2.css')?>" rel="stylesheet">
-    <link href="<?=base_url('assets/vendor/morrisjs/morris.css')?>" rel="stylesheet">
-    <link href="<?=base_url('assets/vendor/font-awesome/css/font-awesome.min.css')?>" rel="stylesheet" type="text/css">
     <script src="<?=base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+    <link rel="stylesheet" href="<?=base_url('assets/vendor/bootstrap/css/bootstrap.min.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/vendor/metisMenu/metisMenu.min.css')?>">
+
+	<?php if($this->session->userdata('level')==1): ?>
+    <link rel="stylesheet" href="<?=base_url('assets/vendor/datatables/datatables.min.css')?>">	
+	<?php endif; ?>
+
+    <link rel="stylesheet" href="<?=base_url('assets/vendor/font-awesome/css/font-awesome.min.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/dist/css/sb-admin-2.css')?>">
 
 </head>
 
@@ -51,8 +56,34 @@ $uri2	= $this->uri->segment(2);
         	if($uri1=='daftar'){
 	        	$this->load->view('daftar');
 
-			}elseif($uri1=='alur_pengajuan'){
-	        	$this->load->view('alur_pengajuan');
+			}elseif($uri1=='pengajuan'){
+	        	if($uri2=='alur_pengajuan'){
+		        	$this->load->view('alur_pengajuan');
+				}elseif($uri2=='pengajuan_saya'){
+		        	$this->load->view('user/pengajuan_saya');
+				}elseif($uri2=='edit_pengajuan'){
+		        	$this->load->view('user/form_pengajuan');
+				}
+	        	
+			}elseif($uri1=='admin'){
+	        	if($uri2=='syarat_berkas'){
+		        	$this->load->view('admin/set_persyaratan');
+				}elseif($uri2=='data_pengajuan'){
+		        	$this->load->view('admin/data_pengajuan');
+				}elseif($uri2=='lihat_pengajuan'){
+		        	$this->load->view('admin/lihat_pengajuan');
+				}elseif($uri2=='pengguna'){
+		        	$this->load->view('admin/set_pengguna');
+				}
+	        	
+			}elseif($uri1=='download_instrumen'){
+				$this->load->view('download_instrumen');
+				
+			}elseif($uri1=='info'){
+				$this->load->view('info');
+
+			}elseif($uri1=='profil_saya'){
+				$this->load->view('edit_profil');
 
 			}else{
 	        	$this->load->view('beranda');
@@ -116,6 +147,9 @@ $uri2	= $this->uri->segment(2);
 	  </div>
 	</div>
 	    
+	<?php if($this->session->userdata('level')==1): ?>
+    <script src="<?=base_url('assets/vendor/datatables/datatables.min.js')?>"></script>
+	<?php endif; ?>
     
     <script src="<?=base_url('assets/vendor/bootstrap/js/bootstrap.min.js')?>"></script>
     <script src="<?=base_url('assets/vendor/metisMenu/metisMenu.min.js')?>"></script>
@@ -133,7 +167,6 @@ $uri2	= $this->uri->segment(2);
 	
 <script type="text/javascript">
 $(function(){
-	$('#side-menu').metisMenu();
 	$('#logout,#logout2').click(function(){
 		$('#modal-logout').modal('show');
 	});

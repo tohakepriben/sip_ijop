@@ -3,281 +3,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends CI_Controller {
 
-	function get_user($uname){
-		$response= array();
-		$row = $this->m_user->get_user($uname);
+    function tambah_pengajuan(){
+    	$jenis_lembaga = $this->input->post('jenis_lembaga');
+    	$jenis_pengajuan = $this->input->post('jenis_pengajuan');
+    	if($this->m_pengajuan->tambah($jenis_lembaga, $jenis_pengajuan)){
+			echo 1;
+		}
+    }
 
+    function hapus_pengajuan(){
+    	$id_user = $this->input->post('id_user');
+    	$id_pengajuan = $this->input->post('id_pengajuan');
+    	if($this->m_pengajuan->hapus_pengajuan($id_pengajuan)){
+    		del_folder2('./files/persyaratan/'.$id_user.'/'.$id_pengajuan.'/');
+			echo 1;
+		}
+    }
+
+    function tolak_terima_pengajuan(){
+    	$id_pengajuan = $this->input->post('id_pengajuan');
+    	$keterangan = $this->input->post('keterangan');
+    	$tolak_terima = $this->input->post('tolak_terima');
+    	if($this->m_pengajuan->tolak_terima($id_pengajuan, $tolak_terima, $keterangan)){
+			echo 1;
+		}
+    }
+
+    function ajukan_permohonan(){
+    	$id_pengajuan = $this->input->post('id_pengajuan');
+    	if($this->m_pengajuan->ajukan_permohonan($id_pengajuan)){
+			echo 1;
+		}
+    }
+
+	function get_all_kelurahan($id_kecamatan){
+		$row = $this->db->get_where('tbl_kelurahan', 'id_kecamatan='.$id_kecamatan)->result_array();
+		$response = array();
 		foreach($row as $r){
 		    array_push($response,
 				array(
-		    		'id'		=> $r['id'],
-		    		'nama'		=> $r['nama'],
-		    		'uname'		=> $r['uname']
-		    	)
-		    );   
-		}
-		echo json_encode($response);		
-	}
-	
-	function update_user(){
-		if($this->m_user->update_user($this->session->userdata('uname'))){
-			echo TRUE;
-		}else{
-			echo FALSE;
-		}
-	}
-	
-	function get_layanan() {
-		$response= array();
-		$row = $this->m_layanan->get_all();
-
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'id'		=> $r['id'],
-		    		'layanan'	=> $r['layanan']
-		    	)
-		    );   
-		}
-		echo json_encode($response);
-	}
-
-	function get_tutor() {
-		$response= array();
-		$row = $this->m_tutor->get_aktif();
-
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'nipy'		=> $r['nipy'],
-		    		'nama'	=> $r['nama']
-		    	)
-		    );   
-		}
-		echo json_encode($response);
-	}
-	function get_kelas() {
-		$response= array();
-		$row = $this->m_kelas->get_all($this->input->get('id_layanan'));
-
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'id'	=> $r['id'],
-		    		'kelas'	=> $r['kelas']
-		    	)
-		    );   
-		}
-		echo json_encode($response);
-	}
-	function hapus_pengumuman($id_pengumuman){
-		if($this->session->userdata('level')==1){
-			echo json_encode(
-					array(
-						'return'	=> $this->m_pengumuman->hapus($id_pengumuman)
-					)
-				);
-			
-		}
-	}
-
-	function update_pengangkatan(){
-		if($this->session->userdata('level')==1){
-			 if($this->m_tutor->update_pengangkatan()){
-			 	echo('sukses');
-			 }
-			
-		}
-	}
-	
-	function update_pembayaran(){
-		if($this->session->userdata('level')==1){
-			$hasil=$this->m_adm->update_pembayaran();
-			echo $hasil;			
-		}
-	}
-
-	function hapus_pembayaran(){
-		if($this->session->userdata('level')==1){
-			$hasil=$this->m_adm->hapus_pembayaran($this->uri->segment(3));
-			echo $hasil;			
-		}
-	}
-	
-	function get_anggota_kelas($id_kelas){
-		$response= array();
-		$row = $this->m_kelas->get_anggota($id_kelas);
-		$no=1;
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'no'			=> $no++,
-		    		'niwb'			=> $r['niwb'],
-		    		'nama'			=> $r['nama'],
-		    		'jk'			=> $r['jk'],
-		    		'tanggal_lahir'	=> $r['tanggal_lahir'],
-		    		'alamat'		=> $r['alamat']
-		    	)
-		    );   
-		}
-		echo json_encode($response);
-	}
-
-	function get_pembelajaran_kelas($id_kelas){
-		$response= array();
-		$row = $this->m_kelas->get_pembelajaran($id_kelas);
-		$no=1;
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'no'			=> $no++,
 		    		'id'			=> $r['id'],
-		    		'id_kelas'		=> $r['id_kelas'],
-		    		'kelas'			=> $r['kelas'],
-		    		'id_mapel'		=> $r['id_mapel'],
-		    		'mapel'			=> $r['mapel'],
-		    		'nipy'			=> $r['nipy'],
-		    		'nama'			=> $r['nama'],
-		    		'sk_tutor'		=> $r['sk_tutor']
-		    	)
-		    );   
-		}
-		echo json_encode($response);		
-	}
-	
-	function get_wb_belum_masuk_kelas(){
-		$response= array();
-		$row = $this->m_wb->get_aktif(FALSE);
-		$no=1;
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'no'			=> $no++,
-		    		'niwb'			=> $r['niwb'],
-		    		'nama'			=> $r['nama'],
-		    		'jk'			=> $r['jk'],
-		    		'ttl'			=> $r['ttl'],
-		    		'alamat'		=> $r['alamat'],
-		    		'ayah_nama'		=> $r['ayah_nama'],
-		    		'ibu_nama'		=> $r['ibu_nama']
-		    	)
-		    );   
-		}
-		echo json_encode($response);
-	}
-	
-	function tambah_anggota_kelas(){
-		if($this->session->userdata('level')==1){
-			$id_kelas=$this->input->get('id_kelas');
-			$niwb=$this->input->get('niwb');
-			$hasil = $this->m_kelas->tambah_anggota($id_kelas, $niwb);
-			echo $hasil;
-		}
-	}
-
-	function hapus_anggota_kelas(){
-		if($this->session->userdata('level')==1){
-			$id_kelas=$this->input->get('id_kelas');
-			$niwb=$this->input->get('niwb');
-			$hasil = $this->m_kelas->hapus_anggota($id_kelas, $niwb);
-			echo $hasil;
-		}
-	}
-
-	function tambah_kelas(){
-		if($this->session->userdata('level')==1){
-			$hasil = $this->m_kelas->insert();
-			echo $hasil;
-		}
-	}
-	function edit_kelas($id_kelas){
-		if($this->session->userdata('level')==1){
-			$hasil = $this->m_kelas->update($id_kelas);
-			echo $hasil;
-		}
-	}
-	function hapus_kelas($id_kelas){
-		if($this->session->userdata('level')==1){
-			$hasil = $this->m_kelas->delete($id_kelas);
-			if($hasil){
-				echo TRUE;
-			}else{
-				echo 'Gagal menghapus kelas';
-			}
-		}
-	}
-	function get_mapel_belum_masuk_kelas($id_kelas){
-		$response= array();
-		$row = $this->m_kelas->get_mapel_belum_masuk_kelas($id_kelas);
-		$no=1;
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'no'			=> $no++,
-		    		'id'			=> $r['id'],
-		    		'mapel'			=> $r['mapel']
-		    	)
-		    );   
-		}
-		echo json_encode($response);
-	}
-	
-	function tambah_pembelajaran_kelas(){
-		if($this->m_kelas->tambah_pembelajaran()){
-			echo TRUE;
-		}else{
-			echo FALSE;
-		}
-	}
-
-	function edit_pembelajaran_kelas(){
-		if($this->m_kelas->edit_pembelajaran()){
-			echo TRUE;
-		}else{
-			echo FALSE;
-		}
-	}
-
-	function hapus_pembelajaran_kelas(){
-		if($this->m_kelas->hapus_pembelajaran()){
-			echo TRUE;
-		}else{
-			echo FALSE;
-		}
-	}
-
-	function get_adm_by_layanan($id_layanan){
-		$response= array();
-		$row = $this->m_adm->get_adm_by_layanan($id_layanan);
-		$no=1;
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'no'			=> $no++,
-		    		'id'			=> $r['id'],
-		    		'pembayaran'	=> $r['pembayaran'],
-		    		'nominal'		=> $r['nominal']
-		    	)
-		    );   
-		}
-		echo json_encode($response);
-		
-	}
-	function get_riwayat_pembayaran($niwb){
-		$response= array();
-		$row = $this->m_adm->get_riwayat_pembayaran($niwb);
-		$no=1;
-		foreach($row as $r){
-		    array_push($response,
-				array(
-		    		'no'			=> $no++,
-		    		'id'			=> $r['id'],
-		    		'niwb'			=> $r['niwb'],
-		    		'tanggal'		=> $r['tanggal'],
-		    		'bayar'			=> $r['bayar'],
-		    		'ket'			=> $r['ket'],
-		    		'id_adm'		=> $r['id_adm'],
-		    		'pembayaran'	=> $r['pembayaran']
+		    		'kelurahan'		=> $r['kelurahan'],
+		    		'kd_pos'		=> $r['kd_pos']
 		    	)
 		    );   
 		}
@@ -285,55 +52,101 @@ class Api extends CI_Controller {
 		
 	}
 
-	function get_adm_terbayar(){
-		$id_adm = $this->input->get('id_adm');
-		$niwb = $this->input->get('niwb');
-		$ret=$this->m_adm->get_adm_terbayar($id_adm, $niwb);
-		if($ret<0){
-			$ret=0;
+	function get_persyaratan(){
+    	$jenis_lembaga = $this->input->post('jenis_lembaga');
+    	$jenis_pengajuan = $this->input->post('jenis_pengajuan');
+		$row = $this->m_berkas->get_syarat_berkas($jenis_lembaga,$jenis_pengajuan);
+		$response = array();
+		foreach($row as $r){
+		    array_push($response,
+				array(
+		    		'id'			=> $r['id'],
+		    		'id_berkas'		=> $r['id_berkas'],
+		    		'berkas'		=> $r['berkas'],
+		    		'disyaratkan'	=> $r['disyaratkan']
+		    	)
+		    );   
 		}
-		echo $ret;		
+		echo json_encode($response);		
+	}
+	function simpan_persyaratan(){
+    	$arr_data = $this->input->post('arr_data');
+		if($this->m_berkas->simpan_persyaratan($arr_data)){echo 1;}else{echo 0;}
 	}
 
-	function simpan_pembayaran_wb(){
-		$ret=$this->m_adm->simpan_pembayaran_wb();
-		if($ret<0){
-			$ret=0;
-		}
-		echo $ret;		
+	function lock_user(){
+		if($this->m_user->lock($this->input->post('id'), $this->input->post('val'))){echo 1;}else{echo 0;}
 	}
-	
-    function upload_wb(){
-    	$upload_path = $this->input->post('upload_path');
-		if (!file_exists($upload_path)) {
-		    mkdir($upload_path, 0777);
-		}    	
+
+	function update_data_lembaga(){
+    	$arr_data = array(
+    		'nama_lembaga'	=> $this->input->post('nama_lembaga'),
+			'tahun_berdiri'	=> $this->input->post('tahun_berdiri'),
+			'nama_pimpinan'	=> $this->input->post('nama_pimpinan'),
+			'hp'			=> $this->input->post('hp'),
+			'nama_yayasan'	=> $this->input->post('nama_yayasan'),
+			'id_kecamatan'	=> $this->input->post('id_kecamatan'),
+			'id_kelurahan'	=> $this->input->post('id_kelurahan'),
+			'jalan_gang'	=> $this->input->post('jalan_gang'),
+			'dukuh'			=> $this->input->post('dukuh'),
+			'rt'			=> $this->input->post('rt'),
+			'rw'			=> $this->input->post('rw')
+    	);
+    	$arr_where = array(
+			'id'			=> $this->input->post('id')
+    	);
+		if($this->m_pengajuan->update_data_lembaga($arr_data, $arr_where)) echo 1;
+	}
+
+    function upload_berkas_persyaratan(){
+    	$id_user = $this->session->userdata('id_user');
+    	$id_pengajuan = $this->input->post('id_pengajuan');
+    	$id_berkas = $this->input->post('id_berkas');
+    	
+    	$uploaded_file = explode('.', $this->input->post('file_name'));
+    	$uploaded_file_ext = end($uploaded_file);
+		
+		$file_name = $id_user.'-'.$id_pengajuan.'-'.$id_berkas.'.'.$uploaded_file_ext;
+    	
+    	$lokasi = './files/persyaratan/'.$id_user.'/'.$id_pengajuan.'/';
+		if (!file_exists($lokasi)) {
+		    mkdir($lokasi, 0777, TRUE);
+		}  
+		  	
     	$config = array(
-    		'upload_path'		=> $upload_path,
-    		'file_name'			=> $this->input->post('file_name'),
+    		'upload_path'		=> $lokasi,
+    		'file_name'			=> $file_name,
     		'allowed_types'		=> $this->input->post('file_type'),
     		'file_ext_tolower'	=> TRUE,
-    		'max_size'			=> 500,
+    		'max_size'			=> 1000,
     		'overwrite'			=> TRUE
     	);
 
         $this->load->library('upload', $config);
 
         if(!$this->upload->do_upload('file_data')){
-            echo $this->upload->display_errors();
+            echo $this->upload->display_errors('', '');
         }else{
-            echo "sukses";
+        	if($this->m_berkas->add_berkas($id_pengajuan, $id_berkas, $file_name)){
+				echo 1;
+			}else{
+				echo 'Error: Gagal menyimpan berkas';
+			}
+            
         }
     }	
-    function hapus_berkas_wb(){
-    	$niwb = $this->input->post('niwb');
+
+    function hapus_berkas_persyaratan(){
+    	$id_user = $this->input->post('id_user');
+    	$id_pengajuan = $this->input->post('id_pengajuan');
     	$file_name = $this->input->post('file_name');
-    	$file_name = 'uploads/wb/' . $niwb . '/' . $file_name;
+    	$arr = explode('-',$file_name);
+    	$this->m_berkas->del_berkas($arr[1],$arr[2]);
+    	
+    	$file_name = 'files/persyaratan/'.$id_user.'/'.$id_pengajuan.'/'.$file_name;
         if(file_exists($file_name)){
             unlink($file_name);
-            echo 'sukses';
-        }else{
-            echo $file_name;
+			echo 1;
         }
     }	
 }

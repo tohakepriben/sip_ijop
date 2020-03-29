@@ -14,5 +14,8 @@ $autoload['helper'] = array(
 $autoload['config'] = array();
 $autoload['language'] = array();
 $autoload['model'] = array(
-						'm_user'
+						'm_user',
+						'm_pengajuan',
+						'm_alamat',
+						'm_berkas'
 						);

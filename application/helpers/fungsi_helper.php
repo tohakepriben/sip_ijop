@@ -4,77 +4,61 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 date_default_timezone_set('Asia/Jakarta');
 
-function login_admin($uname, $pwd){
-	$ci		=&get_instance();
-	$ret	=0;
-	$user 	= $ci->m_auth->get_admin($uname);
-	if($user['password'] == md5($pwd)){
-		if($user['locked']==1){
-			$ret=2;
-		}else{
-			$array = array(
-				'tp' 		=> cur_tahun(),
-				'nama' 		=> $user['nama'],
-				'uname' 	=> $user['uname'],
-				'level'		=> 1
-			);
-			$ci->session->set_userdata($array);
-			$ret=1;				
-		}
+function get_jns_lembaga($id){
+	switch($id){
+		case 1: $ret = 'Ponpes'; break;		
+		case 2: $ret = 'MDTA'; break;		
+		case 3: $ret = 'TPQ'; break;		
+		default: $ret = NULL; break;
 	}
-	return($ret);
+	return $ret;
+}
+function get_status($id_status){
+	switch($id_status){
+		case 1: $ret = 'Belum Diajukan'; break;		
+		case 2: $ret = 'Menunggu Validasi'; break;		
+		case 3: $ret = 'Ditolak'; break;		
+		case 4: $ret = 'Diterima'; break;		
+		default: $ret = NULL; break;
+	}
+	return $ret;
+}
+function get_jns_pengajuan($id){
+	switch($id){
+		case 1: $ret = 'Ijop Baru'; break;		
+		case 2: $ret = 'Perpanjangan Ijop'; break;		
+		default: $ret = NULL; break;
+	}
+	return $ret;
 }
 
-function login_ptk($uname, $pwd){
-	$ci		=&get_instance();
-	$ret	=0;
-	$user 	= $ci->m_auth->get_ptk($uname);
-	if($user['password'] == $pwd){
-		if($user['locked']==1){
-			$ret=2;
-		}else{
-			$array = array(
-				'tp' 		=> cur_tahun(),
-				'nama' 		=> $user['nama'],
-				'uname' 	=> $user['nipy'],
-				'level'		=> 2
-			);
-			$ci->session->set_userdata($array);
-			$ret=1;				
-		}
-	}
-	return($ret);
-}
-
-function upload_img($file, $dest){
-	$ci=&get_instance();
-    $config['upload_path']			= $dest;
-    $config['encrypt_name']			= TRUE;
-    $config['file_ext_tolower']		= TRUE;
-	$config['max_size']				= 512;
-	$config['max_width']			= 1024;
-	$config['max_height']			= 768;
-    $ci->load->library('upload', $config);
-
-    if (!$ci->upload->do_upload($file)){
-        return(FALSE);
-    }else{
-        return($ci->upload->data('file_name'));
+function del_folder2($dirPath) {
+    if (! is_dir($dirPath)) {
+        throw new InvalidArgumentException("$dirPath must be a directory");
     }
+    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+        $dirPath .= '/';
+    }
+    $files = glob($dirPath . '*', GLOB_MARK);
+    foreach ($files as $file) {
+        if (is_dir($file)) {
+            self::del_folder2($file);
+        } else {
+            unlink($file);
+        }
+    }
+    rmdir($dirPath);
 }
 
-function upload_file($file, $dest){
-	$ci=&get_instance();
-    $config['upload_path']			= $dest;
-    $config['encrypt_name']			= TRUE;
-    $config['file_ext_tolower']		= TRUE;
-	$config['max_size']				= 2048;
-    $ci->load->library('upload', $config);
-
-    if (!$ci->upload->do_upload($file)){
-        return(FALSE);
-    }else{
-        return($ci->upload->data('file_name'));
+function del_folder($target) {
+    if(is_dir($target)){
+        $files = glob($target . '*', GLOB_MARK);
+        foreach($files as $file){
+            del_folder( $file );      
+        }
+        rmdir($target);
+    }elseif(is_file($target)){
+        unlink($target);  
     }
 }
 
