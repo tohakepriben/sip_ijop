@@ -60,10 +60,16 @@
 <treenode node="syarat_berkas;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Admin.php;f1;15;2;20;;;;vpos;;v;;a;;r;;d26,15;;b0,0;;m0;;e">
 </treenode>
 </treenode>
-<treenode node="Api;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\controllers\Api.php;f0;3;1;151;;;;vpos;;v;;aCI_Controller;;c;;r;;d32,3;;b0,0;;m0;;e">
+<treenode node="Api;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\controllers\Api.php;f0;3;1;163;;;;vpos;;v;;aCI_Controller;;c;;r;;d32,3;;b0,0;;m0;;e">
 <treenode node="ajukan_permohonan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Api.php;f4;31;5;36;;;;vpos;;v;;a;;r;;d32,31;;b0,0;;m0;;e">
 </treenode>
 <treenode node="get_all_kelurahan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Api.php;f1;38;2;52;;;;vpos;;v;;a;;r;;d42,38;;b0,0;;m0;;eid_kecamatan;;p">
+</treenode>
+<treenode node="get_bln_pengajuan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Api.php;f4;152;2;154;;;;vpos;;v;;a;;r;;d32,152;;b0,0;;m0;;e">
+</treenode>
+<treenode node="get_jumlah_pengajuan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Api.php;f1;160;2;162;;;;vpos;;v;;a;;r;;d73,160;;b0,0;;m0;;eid_lembaga;;pid_pengajuan;;pwhere_status;;p">
+</treenode>
+<treenode node="get_jumlah_pengajuan_by_bulan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Api.php;f1;156;2;158;;;;vpos;;v;;a;;r;;d75,156;;b0,0;;m0;;eid_lembaga;;pbulan;;pwhere_status;;p">
 </treenode>
 <treenode node="get_persyaratan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Api.php;f1;54;2;70;;;;vpos;;v;;a;;r;;d27,54;;b0,0;;m0;;e">
 </treenode>
@@ -140,32 +146,36 @@
 <treenode node="simpan_persyaratan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_berkas.php;f1;19;2;33;;;;vpos;;v;;a;;r;;d39,19;;b0,0;;m0;;earr_data;;p">
 </treenode>
 </treenode>
-<treenode node="M_pengajuan;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f0;3;1;102;;;;vpos;;v;;aCI_Model;;c;;r;;d35,3;;b0,0;;m0;;e">
-<treenode node="ajukan_permohonan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;55;2;63;;;;vpos;;v;;a;;r;;d32,55;;b0,0;;m0;;eid;;p">
+<treenode node="M_pengajuan;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f0;3;1;113;;;;vpos;;v;;aCI_Model;;c;;r;;d35,3;;b0,0;;m0;;e">
+<treenode node="ajukan_permohonan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;57;2;65;;;;vpos;;v;;a;;r;;d32,57;;b0,0;;m0;;eid;;p">
 </treenode>
 <treenode node="get_all;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;5;2;11;;;;vpos;;v;;a;;r;;d47,5;;b0,0;;m0;;ewhere_status;;p">
 </treenode>
-<treenode node="get_by_id;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;19;2;21;;;;vpos;;v;;a;;r;;d24,19;;b0,0;;m0;;eid;;p">
+<treenode node="get_bln_pengajuan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f4;104;2;107;;;;vpos;;v;;a;;r;;d32,104;;b0,0;;m0;;e">
 </treenode>
-<treenode node="get_by_user;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;22;2;24;;;;vpos;;v;;a;;r;;d31,22;;b0,0;;m0;;eid_user;;p">
+<treenode node="get_by_id;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;20;2;22;;;;vpos;;v;;a;;r;;d24,20;;b0,0;;m0;;eid;;p">
 </treenode>
-<treenode node="get_jumlah;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;12;2;18;;;;vpos;;v;;a;;r;;d55,12;;b0,0;;m0;;eid_lembaga;;pid_pengajuan;;p">
+<treenode node="get_by_user;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;24;2;26;;;;vpos;;v;;a;;r;;d31,24;;b0,0;;m0;;eid_user;;p">
 </treenode>
-<treenode node="get_persyaratan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;65;2;74;;;;vpos;;v;;a;;r;;d65,65;;b0,0;;m0;;eid_jenis_lembaga;;pid_jenis_pengajuan;;p">
+<treenode node="get_jumlah;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;12;2;18;;;;vpos;;v;;a;;r;;d80,12;;b0,0;;m0;;eid_lembaga;;pid_pengajuan;;pwhere_status;;p">
 </treenode>
-<treenode node="hapus_pengajuan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;36;2;39;;;;vpos;;v;;a;;r;;d30,36;;b0,0;;m0;;eid;;p">
+<treenode node="get_jumlah_by_bulan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;108;2;111;;;;vpos;;v;;a;;r;;d78,108;;b0,0;;m0;;eid_lembaga;;pbulan;;pwhere_status;;p">
 </treenode>
-<treenode node="hitung_prosen;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;76;2;100;;;;vpos;;v;;a;;r;;d28,76;;b0,0;;m0;;eid;;p">
+<treenode node="get_persyaratan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;67;2;76;;;;vpos;;v;;a;;r;;d65,67;;b0,0;;m0;;eid_jenis_lembaga;;pid_jenis_pengajuan;;p">
 </treenode>
-<treenode node="tambah;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;26;2;34;;;;vpos;;v;;a;;r;;d56,26;;b0,0;;m0;;eid_jenis_lembaga;;pid_jenis_pengajuan;;p">
+<treenode node="hapus_pengajuan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;38;2;41;;;;vpos;;v;;a;;r;;d30,38;;b0,0;;m0;;eid;;p">
 </treenode>
-<treenode node="tolak_terima;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;41;2;49;;;;vpos;;v;;a;;r;;d55,41;;b0,0;;m0;;eid;;ptolak_terima;;pketerangan;;p">
+<treenode node="hitung_prosen;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;78;2;102;;;;vpos;;v;;a;;r;;d28,78;;b0,0;;m0;;eid;;p">
 </treenode>
-<treenode node="update_data_lembaga;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;51;2;53;;;;vpos;;v;;a;;r;;d44,51;;b0,0;;m0;;edata;;pwhere;;p">
+<treenode node="tambah;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;28;2;36;;;;vpos;;v;;a;;r;;d56,28;;b0,0;;m0;;eid_jenis_lembaga;;pid_jenis_pengajuan;;p">
+</treenode>
+<treenode node="tolak_terima;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;43;2;51;;;;vpos;;v;;a;;r;;d55,43;;b0,0;;m0;;eid;;ptolak_terima;;pketerangan;;p">
+</treenode>
+<treenode node="update_data_lembaga;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php;f1;53;2;55;;;;vpos;;v;;a;;r;;d44,53;;b0,0;;m0;;edata;;pwhere;;p">
 </treenode>
 </treenode>
-<treenode node="M_user;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f0;3;1;87;;;;vpos;;v;;aCI_Model;;c;;r;;d30,3;;b0,0;;m0;;e">
-<treenode node="email_exists;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;29;2;32;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;45;2;48;;;;vpos;;v;;a;;r;;d30,45;;b0,0;;m0;;eemail;;p">
+<treenode node="M_user;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f0;3;1;86;;;;vpos;;v;;aCI_Model;;c;;r;;d30,3;;b0,0;;m0;;e">
+<treenode node="email_exists;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;29;2;32;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;41;2;44;;;;vpos;;v;;a;;r;;d30,41;;b0,0;;m0;;eemail;;p">
 </treenode>
 <treenode node="get_all;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;13;2;15;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;13;2;15;;;;vpos;;v;;a;;r;;d19,13;;b0,0;;m0;;e">
 </treenode>
@@ -175,7 +185,7 @@
 </treenode>
 <treenode node="get_user;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;5;2;7;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;5;2;7;;;;vpos;;v;;a;;r;;d26,5;;b0,0;;m0;;eemail;;p">
 </treenode>
-<treenode node="hp_exists;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;34;2;37;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;50;2;53;;;;vpos;;v;;a;;r;;d24,50;;b0,0;;m0;;ehp;;p">
+<treenode node="hp_exists;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;34;2;37;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;46;2;49;;;;vpos;;v;;a;;r;;d24,46;;b0,0;;m0;;ehp;;p">
 </treenode>
 <treenode node="is_locked;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;25;2;27;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;25;2;27;;;;vpos;;v;;a;;r;;d27,25;;b0,0;;m0;;eemail;;p">
 </treenode>
@@ -183,11 +193,13 @@
 </treenode>
 <treenode node="login;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;17;2;23;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;17;2;23;;;;vpos;;v;;a;;r;;d28,17;;b0,0;;m0;;eemail;;php;;p">
 </treenode>
-<treenode node="tambah;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;39;2;56;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;55;2;72;;;;vpos;;v;;a;;r;;d18,55;;b0,0;;m0;;e">
+<treenode node="tambah;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;39;2;56;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;51;2;61;;;;vpos;;v;;a;;r;;d18,51;;b0,0;;m0;;e">
 </treenode>
-<treenode node="update;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;58;2;70;;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;74;2;86;;;;vpos;;v;;a;;r;;d24,74;;b0,0;;m0;;eemail;;p">
+<treenode node="ubah;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;63;2;85;;;;vpos;;v;;a;;r;;d22,63;;b0,0;;m0;;eemail;;p">
 </treenode>
-<treenode node="update_log;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;35;2;43;;;;vpos;;v;;a;;r;;d28,35;;b0,0;;m0;;eemail;;p">
+<treenode node="update;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;58;2;70;;;;vpos;;v;;a;;r;;d24,70;;b0,0;;m0;;eemail;;p">
+</treenode>
+<treenode node="update_log;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_user.php;f1;35;2;39;;;;vpos;;v;;a;;r;;d28,35;;b0,0;;m0;;eemail;;p">
 </treenode>
 </treenode>
 <treenode node="M_wb;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\models\M_wb.php;f0;3;1;193;;;;vpos;;v;;aCI_Model;;c;;r;;d28,3;;b0,0;;m0;;e">
@@ -204,12 +216,12 @@
 <treenode node="tambah;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\models\M_wb.php;f1;22;2;87;;D:\xampp\htdocs\sip-ijop\application\models\NewFile.php;f1;22;2;87;;;;vpos;;v;;a;;r;;d18,22;;b0,0;;m0;;e">
 </treenode>
 </treenode>
-<treenode node="Main;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\controllers\Main.php;f0;3;1;67;;;;vpos;;v;;aCI_Controller;;c;;r;;d33,3;;b0,0;;m0;;e">
+<treenode node="Main;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\controllers\Main.php;f0;3;1;117;;;;vpos;;v;;aCI_Controller;;c;;r;;d33,3;;b0,0;;m0;;e">
 <treenode node="__construct;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\NewFile.php;f1;4;2;6;;D:\xampp\htdocs\sip-ijop\application\controllers\Main.php;f1;4;2;6;;;;vpos;;v;;a;;r;;d24,4;;b0,0;;m0;;e">
 </treenode>
 <treenode node="alur_pengajuan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\NewFile.php;f1;12;2;15;;;;vpos;;v;;a;;r;;d27,15;;b0,0;;m0;;e">
 </treenode>
-<treenode node="daftar;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Main.php;f1;29;2;65;;;;vpos;;v;;a;;r;;d19,29;;b0,0;;m0;;e">
+<treenode node="daftar;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Main.php;f1;29;2;66;;;;vpos;;v;;a;;r;;d19,29;;b0,0;;m0;;e">
 </treenode>
 <treenode node="data_pengajuan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\NewFile.php;f1;36;2;42;;;;vpos;;v;;a;;r;;d27,39;;b0,0;;m0;;e">
 </treenode>
@@ -222,6 +234,8 @@
 <treenode node="info;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Main.php;f1;16;2;20;;;;vpos;;v;;a;;r;;d17,16;;b0,0;;m0;;e">
 </treenode>
 <treenode node="pengajuan_saya;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\NewFile.php;f1;17;2;24;;;;vpos;;v;;a;;r;;d27,20;;b0,0;;m0;;e">
+</treenode>
+<treenode node="profil_saya;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\controllers\Main.php;f1;68;2;116;;;;vpos;;v;;a;;r;;d24,68;;b0,0;;m0;;e">
 </treenode>
 </treenode>
 <treenode node="Pdf;PHP:Class Name;D:\xampp\htdocs\sip-ijop\application\libraries\Pdf.php;f0;3;1;22;;;;vpos;;v;;aDompdf;;c;;r;;d24,3;;b0,0;;m0;;e">
@@ -257,6 +271,8 @@
 <treenode node="get_jns_lembaga;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\helpers\fungsi_helper.php;f0;6;1;14;;;;vpos;;v;;a;;r;;d29,6;;b0,0;;m0;;eid;;p">
 </treenode>
 <treenode node="get_jns_pengajuan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\helpers\fungsi_helper.php;f0;25;1;32;;;;vpos;;v;;a;;r;;d31,25;;b0,0;;m0;;eid;;p">
+</treenode>
+<treenode node="get_nama_bulan;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\helpers\fungsi_helper.php;f0;91;1;109;;;;vpos;;v;;a;;r;;d46,91;;b0,0;;m0;;eid;;pdisingkat;;p">
 </treenode>
 <treenode node="get_status;PHP:Function Name;D:\xampp\htdocs\sip-ijop\application\helpers\fungsi_helper.php;f0;15;1;24;;;;vpos;;v;;a;;r;;d31,15;;b0,0;;m0;;eid_status;;p">
 </treenode>

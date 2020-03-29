@@ -8,7 +8,7 @@ class M_berkas extends CI_Model {
 	}
 
 	function get_syarat_berkas($id_lembaga, $id_pengajuan){
-		$sql = 'SELECT sy.*, ref.berkas
+		$sql = 'SELECT sy.*, ref.berkas, ref.file_ext
 				FROM tbl_ref_berkas AS ref
 				INNER JOIN tbl_syarat_berkas AS sy ON ref.id = sy.id_berkas
 				WHERE sy.id_jenis_lembaga = '.$id_lembaga.' AND

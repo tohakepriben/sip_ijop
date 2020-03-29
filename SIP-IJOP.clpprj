@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="D:\xampp\htdocs\sip-ijop\SIP-IJOP.clpprj">
 	<settings><PM_URL><![CDATA[localhost/sip-ijop]]></PM_URL><PM_HOME_URL><![CDATA[localhost/sip-ijop]]></PM_HOME_URL><PM_LIBS><![CDATA[]]></PM_LIBS><PM_FTP_CONNECTION><![CDATA[]]></PM_FTP_CONNECTION><PM_FTP_DIR><![CDATA[]]></PM_FTP_DIR><PM_FTP_UPLOAD_ON_SAVE><![CDATA[INT:0]]></PM_FTP_UPLOAD_ON_SAVE></settings><removed value=";D:\xampp\htdocs\sip-ijop\.htaccess;D:\xampp\htdocs\sip-ijop\application\cache;D:\xampp\htdocs\sip-ijop\application\cache\index.html;D:\xampp\htdocs\sip-ijop\application\core;D:\xampp\htdocs\sip-ijop\application\core\index.html;D:\xampp\htdocs\sip-ijop\application\hooks;D:\xampp\htdocs\sip-ijop\application\hooks\index.html;D:\xampp\htdocs\sip-ijop\application\language;D:\xampp\htdocs\sip-ijop\application\language\english;D:\xampp\htdocs\sip-ijop\application\language\english\index.html;D:\xampp\htdocs\sip-ijop\application\language\index.html;D:\xampp\htdocs\sip-ijop\application\logs;D:\xampp\htdocs\sip-ijop\application\logs\index.html;D:\xampp\htdocs\sip-ijop\index.php;"/><added value=""/><lastopfiles>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\lihat_pengajuan.php"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\data_pengajuan.php"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\user\pengajuan_saya.php"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\helpers\fungsi_helper.php"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Api.php"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\beranda.php"/>
 	</lastopfiles>
 	<errors version="5.11">
 		<errfile name="D:\xampp\htdocs\sip-ijop\assets\vendor\font-awesome\css\font-awesome.min.css">
@@ -294,8 +294,8 @@
 		<file name="D:\xampp\htdocs\sip-ijop\assets\dist\js\sb-admin-2.js" crc="1517227836"/>
 		<file name="D:\xampp\htdocs\sip-ijop\assets\dist\css\sb-admin-2.min.css" crc="1517227836"/>
 		<file name="D:\xampp\htdocs\sip-ijop\assets\dist\css\sb-admin-2.css" crc="1585052769"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\user\pengajuan_saya.php" crc="1585395725"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\user\form_pengajuan.php" crc="1585383478"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\user\pengajuan_saya.php" crc="1585509879"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\user\form_pengajuan.php" crc="1585509868"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\views\errors\html\index.html" crc="1528811146"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\views\errors\html\error_php.php" crc="1560526950"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\views\errors\html\error_general.php" crc="1528811146"/>
@@ -309,25 +309,26 @@
 		<file name="D:\xampp\htdocs\sip-ijop\application\views\errors\cli\error_db.php" crc="1528811146"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\views\errors\cli\error_404.php" crc="1528811146"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\views\errors\index.html" crc="1528811146"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\set_persyaratan.php" crc="1585383456"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\set_pengguna.php" crc="1585383441"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\lihat_pengajuan.php" crc="1585383421"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\data_pengajuan.php" crc="1585395723"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\nav_top.php" crc="1585117692"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\set_persyaratan.php" crc="1585509868"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\set_pengguna.php" crc="1585509868"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\lihat_pengajuan.php" crc="1585509868"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\admin\data_pengajuan.php" crc="1585509868"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\profil_saya.php" crc="1585509868"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\nav_top.php" crc="1585464092"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\views\nav_menu.php" crc="1585329040"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\main.php" crc="1585337602"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\info.php" crc="1585383597"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\main.php" crc="1585505518"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\info.php" crc="1585509868"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\views\index.html" crc="1528811146"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\download_instrumen.php" crc="1585383559"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\daftar.php" crc="1585383333"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\beranda.php" crc="1585383539"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\alur_pengajuan.php" crc="1585383511"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\views\_template.php" crc="1585383310"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\download_instrumen.php" crc="1585509868"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\daftar.php" crc="1585509868"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\beranda.php" crc="1585516166"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\alur_pengajuan.php" crc="1585509868"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\views\_template.php" crc="1585509868"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\third_party\index.html" crc="1540991317"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_wb.php" crc="1585065020"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_user.php" crc="1585198588"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php" crc="1585395947"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_berkas.php" crc="1585319087"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_user.php" crc="1585469935"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_pengajuan.php" crc="1585510944"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_berkas.php" crc="1585470827"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\models\M_alamat.php" crc="1585117568"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\models\index.html" crc="1540991317"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\libraries\Pdf2.php" crc="1543677366"/>
@@ -337,18 +338,18 @@
 		<file name="D:\xampp\htdocs\sip-ijop\application\libraries\Excel.php" crc="1543687217"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\helpers\js_helper.php" crc="1565940278"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\helpers\index.html" crc="1540991317"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\helpers\fungsi_helper.php" crc="1585395521"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\helpers\fungsi_helper.php" crc="1585488056"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Pengajuan.php" crc="1585385830"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Main.php" crc="1585386433"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Main.php" crc="1585510951"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\index.html" crc="1540991317"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Download.php" crc="1585335049"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Daftar.php" crc="1585383369"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Auth.php" crc="1585385554"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Api.php" crc="1585337610"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Api.php" crc="1585510480"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\controllers\Admin.php" crc="1585385478"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\config\user_agents.php" crc="1515844631"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\config\smileys.php" crc="1515844631"/>
-		<file name="D:\xampp\htdocs\sip-ijop\application\config\routes.php" crc="1585383198"/>
+		<file name="D:\xampp\htdocs\sip-ijop\application\config\routes.php" crc="1585450115"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\config\profiler.php" crc="1515844631"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\config\mimes.php" crc="1515844631"/>
 		<file name="D:\xampp\htdocs\sip-ijop\application\config\migration.php" crc="1515844631"/>

@@ -149,5 +149,17 @@ class Api extends CI_Controller {
 			echo 1;
         }
     }	
+    
+    function get_bln_pengajuan(){
+		echo json_encode($this->m_pengajuan->get_bln_pengajuan());
+	}
+	
+	function get_jumlah_pengajuan_by_bulan($id_lembaga, $bulan, $where_status){
+		echo $this->m_pengajuan->get_jumlah_by_bulan($id_lembaga, $bulan, 'status='.$where_status);
+	}
+	
+	function get_jumlah_pengajuan($id_lembaga, $id_pengajuan, $where_status){
+		echo $this->m_pengajuan->get_jumlah($id_lembaga, $id_pengajuan, 'status='.$where_status);
+	}
 }
 ?>

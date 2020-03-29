@@ -89,3 +89,22 @@ function is_localhost() {
     return in_array($_SERVER['REMOTE_ADDR'], $whitelist);
 }
 
+function get_nama_bulan($id, $disingkat=FALSE){
+	switch($id){
+		case 1: $ret = 'Januari'; break;		
+		case 2: $ret = 'Februari'; break;		
+		case 3: $ret = 'Maret'; break;		
+		case 4: $ret = 'April'; break;		
+		case 5: $ret = 'Mei'; break;		
+		case 6: $ret = 'Juni'; break;		
+		case 7: $ret = 'Juli'; break;		
+		case 8: $ret = 'Agustus'; break;		
+		case 9: $ret = 'September'; break;		
+		case 10: $ret = 'Oktoben'; break;		
+		case 11: $ret = 'November'; break;		
+		case 12: $ret = 'Desember'; break;		
+		default: $ret = 'Januari'; break;
+	}
+	if($disingkat) $ret=$ret.substr(0,2);
+	return $ret;
+}

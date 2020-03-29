@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><?=$title?></h1>
+            <h1 class="page-header" style="margin-top: 10px;"><?=$title?></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -45,6 +45,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nama Berkas</th>
+                                    <th>Tipe File</th>
                                     <th>Disyaratkan</th>
                                 </tr>
                             </thead>
@@ -60,6 +61,7 @@
                                 <tr id="tr-berkas">
                                     <td><?=$no++?></td>
                                     <td><?=$sb['berkas']?></td>
+                                    <td><?=$sb['file_ext']?></td>
                                     <td>
                                     <input type="hidden" name="id-syarat" value="<?=$sb['id']?>" />
 									<div class="btn-group" data-toggle="buttons">
@@ -102,7 +104,9 @@ $(function(){
 	                var tidak_active = this.disyaratkan == 0 ? 'active' : '';
 	                var tidak_checked = this.disyaratkan == 0 ? 'checked' : '';
 	                var data_row = '<tr id="tr-berkas"><td>' + no++ + 
-	                	'</td><td>' + this.berkas + '</td><td>' + 
+	                	'</td><td>' + this.berkas + 
+	                	'</td><td>' + this.file_ext + 
+	                	'</td><td>' + 
 	                	'<input type="hidden" name="id-syarat" value="' + this.id + '" />' +
 						'<div class="btn-group" data-toggle="buttons">' + 
 						  '<label class="btn btn-success btn-sm ' + ya_active + '">' +

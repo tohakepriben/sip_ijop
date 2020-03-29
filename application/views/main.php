@@ -28,6 +28,12 @@ $uri2	= $this->uri->segment(2);
     <link rel="stylesheet" href="<?=base_url('assets/vendor/font-awesome/css/font-awesome.min.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/dist/css/sb-admin-2.css')?>">
 
+	<?php if($uri1==''): ?>
+    <link rel="stylesheet" href="<?=base_url('assets/vendor/chart/chart.min.css')?>">	
+    <script src="<?=base_url('assets/vendor/chart/chart.bundle.min.js')?>"></script>
+    <script src="<?=base_url('assets/vendor/chart/chartjs-plugin-datalabels.js')?>"></script>
+	<?php endif; ?>
+
 </head>
 
 <body>
@@ -120,6 +126,13 @@ $uri2	= $this->uri->segment(2);
     <script src="<?=base_url('assets/vendor/bootstrap/js/bootstrap.min.js')?>"></script>
     <script src="<?=base_url('assets/vendor/metisMenu/metisMenu.min.js')?>"></script>
     <script src="<?=base_url('assets/dist/js/sb-admin-2.js')?>"></script>
+
+
+
+
+
+
+
 
 	<?php if($this->session->flashdata('registrasi_sukses')): ?>
 	<div class="modal fade" id="modal-sukses-daftar" tabindex="-1" role="dialog" aria-labelledby="modal-suksesLabel">

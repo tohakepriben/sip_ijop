@@ -10,16 +10,18 @@ class M_pengajuan extends CI_Model {
 			WHERE '.$where_status.' ORDER BY p.tgl_pengajuan ASC';
 		return $this->db->query($sql)->result_array();
 	}
-	function get_jumlah($id_lembaga, $id_pengajuan = NULL){
-		$sql='select id from tbl_pengajuan where status>1 and id_jenis_lembaga='.$id_lembaga;
-		if(! is_null($id_pengajuan)){
+	function get_jumlah($id_lembaga, $id_pengajuan = 0, $where_status = 'status>1'){
+		$sql='select id from tbl_pengajuan where id_jenis_lembaga='.$id_lembaga.' and '.$where_status;
+		if($id_pengajuan!=0){
 			$sql=$sql.' and id_jenis_pengajuan='.$id_pengajuan;
 		}
 		return $this->db->query($sql)->num_rows();		
 	}
+	
 	function get_by_id($id){
 		return $this->db->get_where('tbl_pengajuan', 'id='.$id)->result_array();
 	}
+	
 	function get_by_user($id_user){
 		return $this->db->get_where('tbl_pengajuan', 'id_user='.$id_user)->result_array();
 	}
@@ -99,5 +101,14 @@ class M_pengajuan extends CI_Model {
 		//return $kelengkapan_berkas.' / '.$cnt2;
 		return round(($pros1+$pros2)/2);
 	}
-	
+
+    function get_bln_pengajuan(){
+    	$sql='select bln_pengajuan, nm_bulan(bln_pengajuan) as bulan from tbl_pengajuan group by bln_pengajuan';
+		return $this->db->query($sql)->result_array();
+	}
+	function get_jumlah_by_bulan($id_lembaga, $bulan, $where_status = 'status>1'){
+		$sql='select id from tbl_pengajuan where id_jenis_lembaga='.$id_lembaga.' and bln_pengajuan='.$bulan.' and '.$where_status;
+		return $this->db->query($sql)->num_rows();		
+	}
+
 }

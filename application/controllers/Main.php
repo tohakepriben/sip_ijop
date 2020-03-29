@@ -9,9 +9,9 @@ class Main extends CI_Controller {
 	function index() {
 		$param['title'] = 'Beranda';
 		$param['sub_title'] = 'Sambutan Kasi PD Pontren Brebes';
-		$param['jp_ponpes'] = $this->m_pengajuan->get_jumlah(1);
-		$param['jp_mdta'] = $this->m_pengajuan->get_jumlah(2);
-		$param['jp_tpq'] = $this->m_pengajuan->get_jumlah(3);
+		$param['jp_ponpes'] = $this->m_pengajuan->get_jumlah(1, 0, 'status=4');
+		$param['jp_mdta'] = $this->m_pengajuan->get_jumlah(2, 0, 'status=4');
+		$param['jp_tpq'] = $this->m_pengajuan->get_jumlah(3, 0, 'status=4');
 		$this->load->view('main', $param);
 	}
 	function info() {
