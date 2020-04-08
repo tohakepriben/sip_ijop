@@ -4,15 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 date_default_timezone_set('Asia/Jakarta');
 
-function get_jns_lembaga($id){
-	switch($id){
-		case 1: $ret = 'Ponpes'; break;		
-		case 2: $ret = 'MDTA'; break;		
-		case 3: $ret = 'TPQ'; break;		
-		default: $ret = NULL; break;
-	}
-	return $ret;
-}
 function get_status($id_status){
 	switch($id_status){
 		case 1: $ret = 'Belum Diajukan'; break;		
@@ -23,6 +14,17 @@ function get_status($id_status){
 	}
 	return $ret;
 }
+
+function get_jns_lembaga($id){
+	switch($id){
+		case 1: $ret = 'Ponpes'; break;		
+		case 2: $ret = 'MDTA'; break;		
+		case 3: $ret = 'TPQ'; break;		
+		default: $ret = NULL; break;
+	}
+	return $ret;
+}
+
 function get_jns_pengajuan($id){
 	switch($id){
 		case 1: $ret = 'Ijop Baru'; break;		
@@ -32,36 +34,19 @@ function get_jns_pengajuan($id){
 	return $ret;
 }
 
-function del_folder2($dirPath) {
-    if (! is_dir($dirPath)) {
-        throw new InvalidArgumentException("$dirPath must be a directory");
-    }
-    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
-        $dirPath .= '/';
-    }
-    $files = glob($dirPath . '*', GLOB_MARK);
-    foreach ($files as $file) {
-        if (is_dir($file)) {
-            self::del_folder2($file);
-        } else {
-            unlink($file);
-        }
-    }
-    rmdir($dirPath);
+function rrmdir($dir) { 
+	if (is_dir($dir)) { 
+		$objects = scandir($dir);
+		foreach ($objects as $object) { 
+			if ($object != "." && $object != "..") { 
+				if (is_dir($dir. DIRECTORY_SEPARATOR .$object) && !is_link($dir."/".$object)) rrmdir($dir. DIRECTORY_SEPARATOR .$object);
+				else unlink($dir. DIRECTORY_SEPARATOR .$object); 
+			} 
+		}
+		rmdir($dir); 
+	} 
 }
-
-function del_folder($target) {
-    if(is_dir($target)){
-        $files = glob($target . '*', GLOB_MARK);
-        foreach($files as $file){
-            del_folder( $file );      
-        }
-        rmdir($target);
-    }elseif(is_file($target)){
-        unlink($target);  
-    }
-}
-
+ 
 function geturi($segmen){
 	return($this->uri->segment($segmen));
 }
@@ -107,4 +92,27 @@ function get_nama_bulan($id, $disingkat=FALSE){
 	}
 	if($disingkat) $ret=$ret.substr(0,2);
 	return $ret;
+}
+function fix_file_name($file_name) {
+	$ret = str_replace('/','',$file_name);
+	$ret = str_replace(' ','_',$ret);
+	$ret = str_replace('__','_',$ret);
+	$ret = strtolower($ret);
+    return $ret;
+}
+
+function config_email(){
+	$config = [
+        'mailtype'  => 'html',
+        'charset'   => 'utf-8',
+        'protocol'  => 'smtp',
+        'smtp_host' => 'smtp.gmail.com',
+        'smtp_user' => 'pdpontrenbbs@gmail.com',  // Email gmail
+        'smtp_pass'   => 'pdpontren2020',  // Password gmail
+        'smtp_crypto' => 'ssl',
+        'smtp_port'   => 465,
+        'crlf'    => "\r\n",
+        'newline' => "\r\n"
+    ];
+    return $config;
 }

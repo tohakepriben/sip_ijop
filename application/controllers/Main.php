@@ -5,7 +5,7 @@ class Main extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 	}
-
+	
 	function index() {
 		$param['title'] = 'Beranda';
 		$param['sub_title'] = 'Sambutan Kasi PD Pontren Brebes';

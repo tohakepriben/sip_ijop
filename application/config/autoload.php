@@ -8,7 +8,6 @@ $autoload['helper'] = array(
 						'form',
 						'text', 
 						'fungsi_helper', 
-						'js_helper', 
 						'file'
 					);
 $autoload['config'] = array();

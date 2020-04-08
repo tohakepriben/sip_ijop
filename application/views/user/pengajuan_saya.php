@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header" style="margin-top: 10px;"><?=$title?></h1>
+            <h2 class="page-header" style="margin-top: 10px; font-family: 'Ubuntu', sans-serif;"><?=$title?></h2>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -33,69 +33,76 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            
                             <?php 
-                            $no = 1;
-                            foreach($data_pengajuan as $r): 
-                            $kecamatan = $this->m_alamat->get_kecamatan($r['id_kecamatan']);
-                            if($kecamatan==''){
-	                            $alamat = '';
-								
-							}else{
-	                            $kelurahan = $this->m_alamat->get_kelurahan($r['id_kelurahan']);
-	                            $rt = $r['rt'];
-	                            $rw = $r['rw'];
-	                            $dukuh = $r['dukuh'];
-	                            if($dukuh == $kelurahan){
-	                            	$alamat = $kelurahan.' RT '.$rt.'/'.$rw.' Kec.'.$kecamatan;									
+                            if(count($data_pengajuan)>0):
+	                            $no = 1;
+	                            foreach($data_pengajuan as $r): 
+	                            $kecamatan = $this->m_alamat->get_kecamatan($r['id_kecamatan']);
+	                            if($kecamatan==''){
+		                            $alamat = '';
+									
 								}else{
-	                            	$alamat = $dukuh.' - '.$kelurahan.' RT '.$rt.'/'.$rw.' Kec.'.$kecamatan;									
+		                            $kelurahan = $this->m_alamat->get_kelurahan($r['id_kelurahan']);
+		                            $rt = $r['rt'];
+		                            $rw = $r['rw'];
+		                            $dukuh = $r['dukuh'];
+		                            if($dukuh == $kelurahan){
+		                            	$alamat = $kelurahan.' RT '.$rt.'/'.$rw.' Kec.'.$kecamatan;									
+									}else{
+		                            	$alamat = $dukuh.' - '.$kelurahan.' RT '.$rt.'/'.$rw.' Kec.'.$kecamatan;									
+									}
 								}
-							}
-                            $prosen = 100;
-							$style_color = '';
-							if($r['status']==1){
-								$prosen = $this->m_pengajuan->hitung_prosen($r['id']);
-							}elseif($r['status']==2){
-								$style_color = 'style="color: orange"';
-							}elseif($r['status']==3){
-								$style_color = 'style="color: red"';							
-							}elseif($r['status']==4){
-								$style_color = 'style="color: green"';							
-							}
-							$url_edit=base_url('pengajuan/edit_pengajuan/'.$r['id']);
+	                            $prosen = 100;
+								$style_color = '';
+								if($r['status']==1){
+									$prosen = $this->m_pengajuan->hitung_prosen($r['id']);
+								}elseif($r['status']==2){
+									$style_color = 'style="color: orange"';
+								}elseif($r['status']==3){
+									$style_color = 'style="color: red"';							
+								}elseif($r['status']==4){
+									$style_color = 'style="color: green"';							
+								}
+								$url_edit=base_url('pengajuan/edit_pengajuan/'.$r['id']);
+	                            ?>
+	                                <tr>
+	                                    <td><?=$no++?></td>
+	                                    <td><?=get_jns_lembaga($r['id_jenis_lembaga'])?></td>
+	                                    <td><?=get_jns_pengajuan($r['id_jenis_pengajuan'])?></td>
+	                                    <td><?=$r['nama_lembaga']?></td>
+	                                    <td><?=$alamat?></td>
+	                                    <td>
+											<div class="progress">
+											  <div class="progress-bar bg-dark" role="progressbar" <?php echo 'style="width: '.$prosen.'%;"' ?> aria-valuenow="<?=$prosen?>" aria-valuemin="0" aria-valuemax="100"><?=$prosen?>%</div>
+											</div>                                    	
+	                                    </td>
+	                                    <td><?=$r['tgl_pengajuan']?></td>
+	                                    <td <?=$style_color?>><?=get_status($r['status'])?></td>
+	                                    <td><?=$r['status']>2 ? $r['tgl_respon'] : '-'?></td>
+	                                    <td><?=$r['keterangan']?></td>
+	                                    <td>
+	                                    	<button 
+	                                    		class="btn btn-xs btn-primary"
+	                                    		onclick="location.href='<?=$url_edit?>'">
+	                                    		<?=($r['status']==1 || $r['status']==3) ? 'Lengkapi' : 'Lihat' ?>
+	                                    	</button>
+	                                    	<?php if($r['status']==1 || $r['status']==3): ?>
+	                                    	<button 
+	                                    		class="btn btn-xs btn-danger"
+												data-toggle="modal" data-target="#modal-hapus-pengajuan"
+	                                    		data-idpengajuan="<?=$r['id']?>">
+	                                    		Hapus
+	                                    	</button>
+	                                    	<?php endif; ?>
+	                                    </td>
+	                                </tr>
+                            <?php 
+                            	endforeach; 
+                        	else:
+	                        	echo '<tr><td colspan="10" class="text-center"><span class="text-danger">Data pengajuan kosong. Silahkan klik tombol Tambah Pengajuan untuk menambah pengajuan baru</span> </td></tr>';
+							endif;
                             ?>
-                                <tr>
-                                    <td><?=$no++?></td>
-                                    <td><?=get_jns_lembaga($r['id_jenis_lembaga'])?></td>
-                                    <td><?=get_jns_pengajuan($r['id_jenis_pengajuan'])?></td>
-                                    <td><?=$r['nama_lembaga']?></td>
-                                    <td><?=$alamat?></td>
-                                    <td>
-										<div class="progress">
-										  <div class="progress-bar bg-dark" role="progressbar" <?php echo 'style="width: '.$prosen.'%;"' ?> aria-valuenow="<?=$prosen?>" aria-valuemin="0" aria-valuemax="100"><?=$prosen?>%</div>
-										</div>                                    	
-                                    </td>
-                                    <td><?=$r['tgl_pengajuan']?></td>
-                                    <td <?=$style_color?>><?=get_status($r['status'])?></td>
-                                    <td><?=$r['status']>2 ? $r['tgl_respon'] : '-'?></td>
-                                    <td><?=$r['keterangan']?></td>
-                                    <td>
-                                    	<button 
-                                    		class="btn btn-xs btn-primary"
-                                    		onclick="location.href='<?=$url_edit?>'">
-                                    		Ubah
-                                    	</button>
-                                    	<?php if($r['status']==1 || $r['status']==3): ?>
-                                    	<button 
-                                    		class="btn btn-xs btn-danger"
-											data-toggle="modal" data-target="#modal-hapus-pengajuan"
-                                    		data-idpengajuan="<?=$r['id']?>">
-                                    		Hapus
-                                    	</button>
-                                    	<?php endif; ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -113,13 +120,13 @@
                     </div>
                     <div class="panel-body">
 		                <strong>1. Belum diajukan</strong>
-		                <p><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Permohonan belum diajukan atau belum lengkap 100%</small></p>
+		                <p style="margin-left: 17px"><small>Permohonan belum diajukan atau belum lengkap 100%</small></p>
 		                <strong>2. Menunggu validasi</strong>
-		                <p><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tim dari PD Pontren sedang memeriksa validitas data yang diajukan. Data pengajuan tidak dapat diubah kecuali ditolak</small></p>
+		                <p style="margin-left: 17px"><small>Tim dari PD Pontren sedang memeriksa validitas data yang diajukan. Jika valid, PD Pontren akan melakukan visitasi sebelum menerima pengajuan. Selama proses ini berlangsung, data pengajuan tidak dapat diubah kecuali ditolak</small></p>
 		                <strong>3. Ditolak</strong>
-		                <p><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pengajuan ditolak karena data yang diajukan tidak valid. Anda bisa mengubah lagi data pengajuan untuk memperbaiki kekurangan</small></p>
+		                <p style="margin-left: 17px"><small>Pengajuan ditolak karena data yang diajukan tidak valid. Anda bisa mengubah lagi data pengajuan untuk memperbaiki kekurangan</small></p>
 		                <strong>4. Diterima</strong>
-		                <p><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pengajuan diterima. Anda bisa datang ke kantor PD Pontren membawa berkas yang sudah diupload</small></p>
+		                <p style="margin-left: 17px"><small>Pengajuan diterima. Anda bisa datang ke kantor PD Pontren pada hari dan tanggal yang sudah ditentukan dalam kolom keterangan dengan membawa berkas yang sudah diupload</small></p>
                     </div>
                 </div>                
             </div>
@@ -214,7 +221,7 @@ $(function(){
 	$('#modal-hapus-pengajuan').on('show.bs.modal', function(event){
 		var button = $(event.relatedTarget);
 		var id_pengajuan = button.data('idpengajuan');
-
+		$('#btn-hapus-konfirmasi').off('click');
 		$('#btn-hapus-konfirmasi').on('click', function(){
 			$.post('<?=base_url("api/hapus_pengajuan/?callback=?")?>',
 				{

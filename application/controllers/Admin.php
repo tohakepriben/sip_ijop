@@ -10,19 +10,32 @@ class Admin extends CI_Controller {
 	}
 
 	function index() {
-		redirect('admin/syarat_berkas');
+		redirect('admin/approval');
 	}
 
 	function syarat_berkas() {
-		$param['syarat_berkas'] = $this->m_berkas->get_syarat_berkas(1,1);
+		$id_jenis_lembaga=$this->input->post('id_jenis_lembaga') ? $this->input->post('id_jenis_lembaga') : 1;
+		$id_jenis_pengajuan=$this->input->post('id_jenis_pengajuan') ? $this->input->post('id_jenis_pengajuan') : 1;
+		$param['id_jenis_lembaga'] = $id_jenis_lembaga;
+		$param['id_jenis_pengajuan'] = $id_jenis_pengajuan;
+		
+		$param['syarat_berkas'] = $this->m_berkas->get_syarat_berkas($id_jenis_lembaga,$id_jenis_pengajuan);
 		$param['title'] = 'Pengaturan';
 		$param['sub_title'] = 'Syarat-syarat Berkas';
+		
 		$this->load->view('main', $param);
 	}
 
-	function data_pengajuan() {
-		$param['arr_pengajuan'] = $this->m_pengajuan->get_all('p.status=2 or p.status=4');
-		$param['title'] = 'Data Pengajuan';
+	function approval() {
+		$param['arr_pengajuan'] = $this->m_pengajuan->get_all('p.status=2');
+		$param['title'] = 'Approval Pengajuan';
+		$param['sub_title'] = 'Data Pengajuan Ijop';
+		$this->load->view('main', $param);
+	}
+
+	function pengajuan_diterima() {
+		$param['arr_pengajuan'] = $this->m_pengajuan->get_all('p.status=4');
+		$param['title'] = 'Pengajuan Diterima';
 		$param['sub_title'] = 'Data Pengajuan Ijop';
 		$this->load->view('main', $param);
 	}

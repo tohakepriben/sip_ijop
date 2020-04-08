@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header" style="margin-top: 10px;"><?=$title?></h1>
+            <h2 class="page-header" style="margin-top: 10px; font-family: 'Ubuntu', sans-serif;"><?=$title?></h2>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -150,6 +150,7 @@
 			                				.'&id_user='.$r['id_user']
 			                				.'&id_pengajuan='.$r['id']
 			                				.'&file='.$file);
+			                $fix_file_ext = str_replace('|', ' / ', $p['file_ext']);
 			                ?>
 								<div style="padding: 5px" class="form-group <?=$ada ? 'bg-info' : 'bg-danger'?>">
 		                            <label id="lbl<?=$p['id_berkas']?>"><?=$p['berkas']?></label>
@@ -157,15 +158,23 @@
 			                            <div class="col col-sm-7">
 			                            	<input type="file" class="form-control" disabled
 			                            	id="<?=$p['id_berkas']?>" data-filetype="<?=$p['file_ext']?>" >
-				                            <div class="text-danger">Tipe file: <?=$p['file_ext']?></div>
+				                            <div class="text-danger">Tipe file: <?=$fix_file_ext?></div>
 			                            </div>
 			                            <div class="col col-sm-5">
 											<button 
-											class="btn btn-sm btn-success" <?=$ada ? '' : 'disabled'?>
+											class="btn btn-sm" disabled=""
+											><i class="fa fa-cloud-upload"> Upload</i></button>
+											
+											<button 
+											<?=$ada ? 'class="btn btn-sm btn-success"' : 'class="btn btn-sm" disabled'?>
 											id="btn-download"
 											data-idberkas="<?=$p['id_berkas']?>" 
 											onclick="location.href='<?=$url_dl?>'"
 											><i class="fa fa-cloud-download"> Download</i></button>
+
+											<button 
+											class="btn btn-sm" disabled=""
+											><i class="fa fa-trash"> Hapus</i></button>
 
 			                            </div>
 		                            </div>
@@ -176,12 +185,16 @@
 
                     <?php 
                     endforeach;
+                    if($r['status']==2):
                     ?>
                 	
-                	<div class="well-sm">
+                	<div class="well well-sm">
                 		<button class="btn btn-danger" data-toggle="modal" data-target="#modal-tolak-terima">Tolak</button>
                 		<button class="btn btn-primary" data-toggle="modal" data-target="#modal-tolak-terima">Terima</button>
             		</div>
+            		
+            		<?php endif; ?>
+            		
             	</div>
             </div>
             <!-- /.panel-body -->
@@ -201,11 +214,13 @@
 				<div class="form-group">
                     <label>Keterangan / Alasan</label>
                     <textarea class="form-control" id="keterangan">Ket</textarea>
+                    <small>Informasi ini juga akan dikirim ke email user</small>
                 </div>                    	
             </form>
         
       </div>
       <div class="modal-footer">
+      	<span id="spanblink" class="pull-left text-danger"></span>
         <button id="btn-simpan" class="btn btn-primary">Ok</button>
         <button class="btn btn-default" data-dismiss="modal">Batal</button>
       </div>
@@ -214,6 +229,10 @@
 </div>
 
 <script>
+function blink_text() {
+    $('#spanblink').fadeOut(500);
+    $('#spanblink').fadeIn(500);
+}
 $(function(){
 	$('#modal-tolak-terima').on('show.bs.modal', function(event){
 		var button = $(event.relatedTarget);
@@ -222,28 +241,38 @@ $(function(){
 		
 		if(button.hasClass('btn-danger')){
 			$('#modal-label').text('Tolak Pengajuan');
+			$('#keterangan').text('');
 			tolak_terima='tolak';
 		}else{
 			$('#modal-label').text('Terima Pengajuan');
+			$('#keterangan').text('Silahkan datang ke kantor PD Pontren Brebes untuk mengambil SK Ijop dengan membawa Berkas Pengajuan yang telah diupload sebelumnya');
 			tolak_terima='terima';			
 		}
 		
+		$('#btn-simpan').off('click');
 		$('#btn-simpan').on('click', function(){
 			if($('#keterangan').val()==''){
 				alert('Keterangan wajib diisi');
 				return;
 			}
+			$('#btn-simpan').attr('disabled', true);
+			myTimer = setInterval(blink_text, 1000);
+			$('#spanblink').text('Tunggu sebentar....');
 			$.post('<?=base_url("api/tolak_terima_pengajuan/?callback=?")?>',
 				{
 					id_pengajuan : id_pengajuan,
 					tolak_terima : tolak_terima,
+					id_user : <?=$r['id_user']?>,
 					keterangan : $('#keterangan').val()
 				},
 				function(data){
 					if(data==1){
-						location.href='<?=base_url("admin/data_pengajuan")?>';
+						location.href='<?=base_url("admin/approval")?>';
 					}else{
 						alert('Error: Tidak dapat menyimpan data');
+						$('#btn-simpan').attr('disabled', false);
+						clearInterval(myTimer);
+						$('#spanblink').text('');
 					}
 				}
 			);

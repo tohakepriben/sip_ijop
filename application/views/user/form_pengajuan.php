@@ -8,7 +8,7 @@ $id_pengajuan=0;
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header" style="margin-top: 10px;"><?=$title?></h1>
+            <h2 class="page-header" style="margin-top: 10px; font-family: 'Ubuntu', sans-serif;"><?=$title?></h2>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -157,7 +157,7 @@ $id_pengajuan=0;
 						
 			            <div class="panel panel-default">
 			                <div class="panel-heading">
-			                    <i class="fa fa-files-o fa-fw"></i> Berkas-berkas
+			                    <i class="fa fa-files-o fa-fw"></i> Berkas-berkas <span class="text-danger">(Maks 1Mb)</span>
 			                </div>
 			                <div id="panel-berkas" class="panel-body">
 			                <?php 
@@ -169,10 +169,7 @@ $id_pengajuan=0;
 			                				.'&id_user='.$r['id_user']
 			                				.'&id_pengajuan='.$r['id']
 			                				.'&file='.$file);
-
-			                //$file_download=$this->session->userdata('id_user').'-'.$r['id'].'-'.$p['id_berkas'];
-			                //$file_download=$file_download.'-'.$this->m_berkas->get_nama_berkas($p['id_berkas']);
-
+			                $fix_file_ext = str_replace('|', ' / ', $p['file_ext']);
 			                ?>
 								<div style="padding: 5px" class="form-group <?=$ada ? 'bg-info' : 'bg-danger'?>">
 		                            <label id="lbl<?=$p['id_berkas']?>"><?=$p['berkas']?></label>
@@ -180,19 +177,19 @@ $id_pengajuan=0;
 			                            <div class="col col-sm-7">
 			                            	<input type="file" class="form-control" <?=$ada ? 'disabled' : ''?>
 			                            	id="<?=$p['id_berkas']?>" data-filetype="<?=$p['file_ext']?>" >
-				                            <div class="text-danger">Tipe file: <?=$p['file_ext']?></div>
+				                            <div class="text-danger">Tipe file: <?=$fix_file_ext?></div>
 			                            </div>
 			                            <div class="col col-sm-5">
 											<?php if($removable): ?>
 											<button 
-											class="btn btn-sm btn-primary" <?=$ada ? 'disabled' : ''?>
+											<?=$ada ? 'class="btn btn-sm" disabled' : 'class="btn btn-sm btn-primary"'?>
 											id="btn-upload"
 											data-idberkas="<?=$p['id_berkas']?>" 
 											><i class="fa fa-cloud-upload"> Upload</i></button>
 											<?php endif; ?>
 											
 											<button 
-											class="btn btn-sm btn-success" <?=$ada ? '' : 'disabled'?>
+											<?=$ada ? 'class="btn btn-sm btn-success"' : 'class="btn btn-sm" disabled'?>
 											id="btn-download"
 											data-idberkas="<?=$p['id_berkas']?>" 
 											onclick="location.href='<?=$url_dl?>'"
@@ -200,7 +197,7 @@ $id_pengajuan=0;
 
 											<?php if($removable): ?>
 											<button 
-											class="btn btn-sm btn-danger" <?=$ada ? '' : 'disabled'?>
+											<?=$ada ? 'class="btn btn-sm btn-danger"' : 'class="btn btn-sm" disabled'?>
 											data-toggle="modal" data-target="#modal-hapus-berkas"
 											id="btn-hapus"
 											data-idberkas="<?=$p['id_berkas']?>" 
@@ -332,7 +329,8 @@ $(function(){
 	        processData	: false,
 	        success		: function(data){
 	        				if(data==1){
-	        					curr_btn.addClass('disabled');
+	        					curr_btn.removeClass('btn-primary');
+	        					curr_btn.attr('disabled', true);
 	        					ctl_file.attr('disabled', true);
 	        					alert('Sukses. Silahkan klik tombol Refresh atau tekan F5 pada keyboard untuk melihat perubahan');
 							}else{
@@ -351,6 +349,7 @@ $(function(){
 		var id_user = <?=$this->session->userdata('id_user')?>;
 		
 		$('#nama-berkas-hapus').text($('label#lbl'+id_berkas).text());
+		$('#btn-hapus-konfirmasi').off('click');
 		$('#btn-hapus-konfirmasi').on('click', function(){
 			$.post('<?=base_url("api/hapus_berkas_persyaratan/?callback=?")?>',
 				{

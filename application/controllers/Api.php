@@ -2,6 +2,45 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends CI_Controller {
+	function ref_tambah_berkas(){
+		$berkas = $this->input->post('berkas');
+		$file_ext = $this->input->post('file_ext');
+		if(trim($berkas)=='' || trim($file_ext)==''){
+			echo 'belum lengkap';
+		}else{
+			echo $this->m_berkas->ref_tambah_berkas($berkas, $file_ext);			
+		}
+	}
+	
+	function ref_edit_berkas(){
+		$id = $this->input->post('id');
+		$berkas = $this->input->post('berkas');
+		$file_ext = $this->input->post('file_ext');
+		if(trim($berkas)=='' || trim($file_ext)==''){
+			echo 'belum lengkap';
+		}else{
+			echo $this->m_berkas->ref_edit_berkas($id, $berkas, $file_ext);
+		}
+	}
+
+	function ref_hapus_file_berkas(){
+		$id = $this->input->post('id');
+		$id_lembaga = $this->input->post('id_lembaga');
+    	if($this->m_berkas->ref_update_file_berkas($id, 'file_'.$id_lembaga, '')){
+			$file = $this->input->post('file');
+	    	$file_path = 'files/instrumen/'.$id_lembaga;
+	        if(file_exists($file_path.'/'.$file)) unlink($file_path.'/'.$file);
+			echo 1;
+		}else{
+			echo 'Error: Gagal menghapus berkas';
+		}
+
+
+	}
+
+	function simpan_syarat(){
+		if($this->m_berkas->simpan_syarat($this->input->post('id'), $this->input->post('disyaratkan'))) echo 1;
+	}
 
     function tambah_pengajuan(){
     	$jenis_lembaga = $this->input->post('jenis_lembaga');
@@ -15,7 +54,7 @@ class Api extends CI_Controller {
     	$id_user = $this->input->post('id_user');
     	$id_pengajuan = $this->input->post('id_pengajuan');
     	if($this->m_pengajuan->hapus_pengajuan($id_pengajuan)){
-    		del_folder2('./files/persyaratan/'.$id_user.'/'.$id_pengajuan.'/');
+    		rrmdir('./files/persyaratan/'.$id_user.'/'.$id_pengajuan.'/');
 			echo 1;
 		}
     }
@@ -24,8 +63,37 @@ class Api extends CI_Controller {
     	$id_pengajuan = $this->input->post('id_pengajuan');
     	$keterangan = $this->input->post('keterangan');
     	$tolak_terima = $this->input->post('tolak_terima');
+		$id_user = $this->input->post('id_user');
+		$email_user = $this->m_user->get_detil_by_id($id_user, 'email');
+
+
     	if($this->m_pengajuan->tolak_terima($id_pengajuan, $tolak_terima, $keterangan)){
-			echo 1;
+
+			$subject = 'Pengajuan Ijop Diterima';
+			if($tolak_terima=='tolak') $subject = 'Pengajuan Ijop Ditolak';
+			
+	        $nama_user = $this->m_user->get_detil_by_id(
+	        			$this->m_pengajuan->get_detil($id_pengajuan, 'id_user'), 'nama');
+			$jenis_lembaga = get_jns_lembaga($this->m_pengajuan->get_detil($id_pengajuan, 'id_jenis_lembaga'));
+			$jenis_pengajuan = get_jns_pengajuan($this->m_pengajuan->get_detil($id_pengajuan, 'id_jenis_pengajuan'));
+			$nama_lembaga = $this->m_pengajuan->get_detil($id_pengajuan, 'nama_lembaga');
+			$tgl_pengajuan = $this->m_pengajuan->get_detil($id_pengajuan, 'tgl_pengajuan');
+			
+	        $pesan = '<div style="font-size: 14px">Assalamu&apos;alaikum Wr. Wb.<br /><br />';
+	        $pesan = $pesan.'Yth. '.$nama_user.'. Pengajuan '.$jenis_pengajuan.' untuk '.$jenis_lembaga.' '.$nama_lembaga.' tertanggal '.$tgl_pengajuan;
+	        $pesan = $pesan.' di'.$tolak_terima.' dengan keterangan sebagai berikut:<br /><br />';
+	        $pesan = $pesan.'<code><strong>'.$keterangan.'</strong></code><br /><br />';
+	        $pesan = $pesan.'Wassalamu&apos;alaikum Wr. Wb.<br /><br />';
+	        $pesan = $pesan.'Admin Sip Ijop</div>';
+
+	        $this->load->library('email', config_email());
+	        
+	        $this->email->from('pd.pontren.bbs@gmail.com', 'sipijop.com');
+	        $this->email->to($email_user);
+	        $this->email->subject($subject);
+	        $this->email->message($pesan);
+
+	        if($this->email->send()) echo 1; else echo 0;
 		}
     }
 
@@ -63,15 +131,12 @@ class Api extends CI_Controller {
 		    		'id'			=> $r['id'],
 		    		'id_berkas'		=> $r['id_berkas'],
 		    		'berkas'		=> $r['berkas'],
+		    		'file_ext'		=> $r['file_ext'],
 		    		'disyaratkan'	=> $r['disyaratkan']
 		    	)
 		    );   
 		}
 		echo json_encode($response);		
-	}
-	function simpan_persyaratan(){
-    	$arr_data = $this->input->post('arr_data');
-		if($this->m_berkas->simpan_persyaratan($arr_data)){echo 1;}else{echo 0;}
 	}
 
 	function lock_user(){
@@ -98,6 +163,51 @@ class Api extends CI_Controller {
 		if($this->m_pengajuan->update_data_lembaga($arr_data, $arr_where)) echo 1;
 	}
 
+    function upload_berkas_instrumen(){
+    	$id_lembaga = $this->input->post('id_lembaga');
+    	$id_berkas = $this->input->post('id_berkas');
+    	
+    	$uploaded_file = explode('.', $this->input->post('file_name'));
+    	$uploaded_file_ext = end($uploaded_file);
+		
+		$file_name = get_jns_lembaga($id_lembaga)
+			.'_'
+			.fix_file_name($this->m_berkas->ref_get_detil_berkas($id_berkas, 'berkas'))
+			.'.'
+			.$uploaded_file_ext;
+    	
+    	$lokasi = './files/instrumen/'.$id_lembaga.'/';
+		if (!file_exists($lokasi)) {
+		    mkdir($lokasi, 0777, TRUE);
+		}  
+		
+		$file_ext=$this->m_berkas->ref_get_detil_berkas($id_berkas, 'file_ext');
+		if($file_ext=='pdf') $file_ext=$file_ext.'|doc|docx';
+		
+    	$config = array(
+    		'upload_path'		=> $lokasi,
+    		'file_name'			=> $file_name,
+    		'allowed_types'		=> $file_ext,
+    		'file_ext_tolower'	=> TRUE,
+    		'max_size'			=> 1024,
+    		'overwrite'			=> TRUE
+    	);
+
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload('file_data')){
+            echo $this->upload->display_errors('', '');
+            //echo $id_berkas.'-'.$this->m_berkas->ref_get_detil_berkas($id_berkas, 'file_ext');
+        }else{
+        	if($this->m_berkas->ref_update_file_berkas($id_berkas, 'file_'.$id_lembaga, $file_name)){
+				echo 1;
+			}else{
+				echo 'Error: Gagal menyimpan berkas';
+			}
+            
+        }
+    }	
+
     function upload_berkas_persyaratan(){
     	$id_user = $this->session->userdata('id_user');
     	$id_pengajuan = $this->input->post('id_pengajuan');
@@ -118,7 +228,7 @@ class Api extends CI_Controller {
     		'file_name'			=> $file_name,
     		'allowed_types'		=> $this->input->post('file_type'),
     		'file_ext_tolower'	=> TRUE,
-    		'max_size'			=> 1000,
+    		'max_size'			=> 1024,
     		'overwrite'			=> TRUE
     	);
 
@@ -127,7 +237,7 @@ class Api extends CI_Controller {
         if(!$this->upload->do_upload('file_data')){
             echo $this->upload->display_errors('', '');
         }else{
-        	if($this->m_berkas->add_berkas($id_pengajuan, $id_berkas, $file_name)){
+        	if($this->m_berkas->pengajuan_add_berkas($id_pengajuan, $id_berkas, $file_name)){
 				echo 1;
 			}else{
 				echo 'Error: Gagal menyimpan berkas';
@@ -141,7 +251,7 @@ class Api extends CI_Controller {
     	$id_pengajuan = $this->input->post('id_pengajuan');
     	$file_name = $this->input->post('file_name');
     	$arr = explode('-',$file_name);
-    	$this->m_berkas->del_berkas($arr[1],$arr[2]);
+    	$this->m_berkas->pengajuan_del_berkas($arr[1],$arr[2]);
     	
     	$file_name = 'files/persyaratan/'.$id_user.'/'.$id_pengajuan.'/'.$file_name;
         if(file_exists($file_name)){

@@ -1,0 +1,32 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+$lang['form_validation_required']		= 'Kolom {field} tidak boleh kosong.';
+$lang['form_validation_isset']			= 'Kolom {field} tidak boleh kosong.';
+$lang['form_validation_valid_email']		= 'Kolom {field} harus berisi email yang valid.';
+$lang['form_validation_valid_emails']		= 'Kolom {field} harus berisi email yang valid.';
+$lang['form_validation_valid_url']		= 'Kolom {field} harus berisi alamat URL yang valid.';
+$lang['form_validation_valid_ip']		= 'Kolom {field} harus berisi alamat IP yang valid.';
+$lang['form_validation_min_length']		= 'Kolom {field} minimal berisi {param} karakter.';
+$lang['form_validation_max_length']		= 'Kolom {field} cannot exceed {param} characters in length.';
+$lang['form_validation_exact_length']		= 'Kolom {field} must be exactly {param} characters in length.';
+$lang['form_validation_alpha']			= 'Kolom {field} may only contain alphabetical characters.';
+$lang['form_validation_alpha_numeric']		= 'Kolom {field} may only contain alpha-numeric characters.';
+$lang['form_validation_alpha_numeric_spaces']	= 'Kolom {field} may only contain alpha-numeric characters and spaces.';
+$lang['form_validation_alpha_dash']		= 'Kolom {field} may only contain alpha-numeric characters, underscores, and dashes.';
+$lang['form_validation_numeric']		= 'Kolom {field} must contain only numbers.';
+$lang['form_validation_is_numeric']		= 'Kolom {field} must contain only numeric characters.';
+$lang['form_validation_integer']		= 'Kolom {field} must contain an integer.';
+$lang['form_validation_regex_match']		= 'Kolom {field} is not in the correct format.';
+$lang['form_validation_matches']		= 'Kolom {field} tidak cocok dengan kolom {param}.';
+$lang['form_validation_differs']		= 'Kolom {field} must differ from the {param} field.';
+$lang['form_validation_is_unique'] 		= 'Kolom {field} must contain a unique value.';
+$lang['form_validation_is_natural']		= 'Kolom {field} must only contain digits.';
+$lang['form_validation_is_natural_no_zero']	= 'Kolom {field} must only contain digits and must be greater than zero.';
+$lang['form_validation_decimal']		= 'Kolom {field} must contain a decimal number.';
+$lang['form_validation_less_than']		= 'Kolom {field} must contain a number less than {param}.';
+$lang['form_validation_less_than_equal_to']	= 'Kolom {field} must contain a number less than or equal to {param}.';
+$lang['form_validation_greater_than']		= 'Kolom {field} must contain a number greater than {param}.';
+$lang['form_validation_greater_than_equal_to']	= 'Kolom {field} must contain a number greater than or equal to {param}.';
+$lang['form_validation_error_message_not_set']	= 'Unable to access an error message corresponding to your name {field}.';
+$lang['form_validation_in_list']		= 'Kolom {field} must be one of: {param}.';

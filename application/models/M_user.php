@@ -11,6 +11,10 @@ class M_user extends CI_Model {
 		return $this->db->get_where('tbl_user', 'email="'.$email.'"')->row($field);
 	}
 
+	function get_detil_by_id($id, $field){
+		return $this->db->get_where('tbl_user', 'id='.$id)->row($field);
+	}
+
 	function get_all(){
 		return $this->db->get_where('tbl_user', 'level=2')->result_array();
 	}

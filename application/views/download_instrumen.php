@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header" style="margin-top: 10px;"><?=$title?></h1>
+            <h2 class="page-header" style="margin-top: 10px; font-family: 'Ubuntu', sans-serif;"><?=$title?></h2>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -29,28 +29,44 @@
                             $no = 1;
                             foreach($instrumen as $r): 
                             if(strtolower($r['berkas'])=='null') continue;
-                            $url_dl_ponpes=base_url('download/?kind=instrumen&lembaga=ponpes&file='.$r['file_ponpes']);
-                            $url_dl_mdta=base_url('download/?kind=instrumen&lembaga=mdta&file='.$r['file_mdta']);
-                            $url_dl_tpq=base_url('download/?kind=instrumen&lembaga=tpq&file='.$r['file_tpq']);
+                            $ada_ponpes=$r['file_1']!='';
+                            $ada_mdta=$r['file_2']!='';
+                            $ada_tpq=$r['file_3']!='';
+
+                            $url_dl_ponpes=base_url('download/?kind=instrumen&id_jenis_lembaga=1&file='.$r['file_1']);
+                            $url_dl_mdta=base_url('download/?kind=instrumen&id_jenis_lembaga=2&file='.$r['file_2']);
+                            $url_dl_tpq=base_url('download/?kind=instrumen&id_jenis_lembaga=3&file='.$r['file_3']);
                             ?>
                                 <tr>
                                     <td><?=$no++?></td>
                                     <td><?=$r['berkas']?></td>
                                     <td>
                                     	<button 
-                                    		class="btn btn-xs btn-primary"
-                                    		onclick="location.href='<?=$url_dl_ponpes?>'">
-                                    		<i class="fa fa-cloud-download"> Ponpes</i>
+                                    		<?php if($ada_ponpes): ?>
+        	                            		class="btn btn-xs btn-primary"
+	                                    		onclick="location.href='<?=$url_dl_ponpes?>'"
+                                    		<?php else: ?>
+        	                            		class="btn btn-xs btn-default disabled"
+                                    		<?php endif; ?>
+                                    		><i class="fa fa-cloud-download"> Ponpes</i>
                                 		</button>
                                     	<button 
-                                    		class="btn btn-xs btn-success"
-                                    		onclick="location.href='<?=$url_dl_mdta?>'">
-                                    		<i class="fa fa-cloud-download"> MDTA</i>
+                                    		<?php if($ada_mdta): ?>
+    	                                		class="btn btn-xs btn-success"
+    	                                		onclick="location.href='<?=$url_dl_mdta?>'"
+                                    		<?php else: ?>
+        	                            		class="btn btn-xs btn-default disabled"
+                                    		<?php endif; ?>
+                                    		><i class="fa fa-cloud-download"> MDTA</i>
                                 		</button>
                                     	<button 
-                                    		class="btn btn-xs btn-info"
-                                    		onclick="location.href='<?=$url_dl_tpq?>'">
-                                    		<i class="fa fa-cloud-download"> TPQ</i>
+                                    		<?php if($ada_tpq): ?>
+	                                    		class="btn btn-xs btn-info"
+        	                            		onclick="location.href='<?=$url_dl_tpq?>'"
+                                    		<?php else: ?>
+        	                            		class="btn btn-xs btn-default disabled"
+                                    		<?php endif; ?>
+                                    		><i class="fa fa-cloud-download"> TPQ</i>
                                 		</button>
                                     </td>
                                 </tr>

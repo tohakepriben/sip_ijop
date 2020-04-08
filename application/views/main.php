@@ -13,7 +13,7 @@ $uri2	= $this->uri->segment(2);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Sistem Informasi Pelayanan Ijin Operasional Ponpes, MDTA dan TPQ Kab. Brebes">
     <meta name="author" content="Toha Kepriben">
-    <link href="<?=base_url('assets/logo.png')?>" rel="icon" type="image/png" />	
+    <link href="<?=base_url('assets/favicon.png')?>" rel="icon" type="image/png" />	
 
     <title>SIP IJOP Brebes</title>
 
@@ -33,6 +33,8 @@ $uri2	= $this->uri->segment(2);
     <script src="<?=base_url('assets/vendor/chart/chart.bundle.min.js')?>"></script>
     <script src="<?=base_url('assets/vendor/chart/chartjs-plugin-datalabels.js')?>"></script>
 	<?php endif; ?>
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Ubuntu:wght@500&display=swap">
 
 </head>
 
@@ -44,12 +46,15 @@ $uri2	= $this->uri->segment(2);
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">Navigasi</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?=base_url()?>">SIP Ijop Kab. Brebes</a>
+                <a class="navbar-brand" href="<?=base_url()?>" 
+                	style="font-family: 'Pacifico', cursive;">
+                	SIP Ijop Kab. Brebes
+                </a>
             </div>
 
             <?php $this->load->view('nav_top') ?>
@@ -74,8 +79,10 @@ $uri2	= $this->uri->segment(2);
 			}elseif($uri1=='admin'){
 	        	if($uri2=='syarat_berkas'){
 		        	$this->load->view('admin/set_persyaratan');
-				}elseif($uri2=='data_pengajuan'){
-		        	$this->load->view('admin/data_pengajuan');
+				}elseif($uri2=='approval'){
+		        	$this->load->view('admin/approval');
+				}elseif($uri2=='pengajuan_diterima'){
+		        	$this->load->view('admin/pengajuan_diterima');
 				}elseif($uri2=='lihat_pengajuan'){
 		        	$this->load->view('admin/lihat_pengajuan');
 				}elseif($uri2=='pengguna'){
@@ -195,6 +202,29 @@ $uri2	= $this->uri->segment(2);
 	</div>
 	<script type="text/javascript">
 		$('#modal-sukses-update-profil').modal('show');	
+	</script>
+
+	<?php elseif($this->session->flashdata('pengajuan_sukses')): ?>	    
+	<div class="modal fade" id="modal-sukses-pengajuan" tabindex="-1" role="dialog" aria-labelledby="modal-suksesLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Pengajuan Ijop Berhasil</h4>
+	      </div>
+	      <div class="modal-body">
+	        Silahkan menunggu Tim dari PD Pontren melakukan validasi data pengajuan dan visitasi ke lembaga anda.<br />
+	        Penolakan atau penerimaan pengajuan akan kami informasikan melalui website ini dan email atau nomor HP anda.<br />
+	        Terimakasih
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script type="text/javascript">
+		$('#modal-sukses-pengajuan').modal('show');	
 	</script>
 	<?php endif; ?>
 	

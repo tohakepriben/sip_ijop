@@ -4,10 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_pengajuan extends CI_Model {
 
 	function get_all($where_status = 'p.status>0'){
-		$sql = 'SELECT p.*, u.nama AS nama_user, u.email AS email_user, u.hp AS hp_user
+		$sql = 'SELECT p.*, u.nama AS nama_user, u.email AS email_user, u.hp AS hp_user, u.last_login AS log_user
 			FROM tbl_pengajuan AS p
 			INNER JOIN tbl_user AS u ON p.id_user = u.id
-			WHERE '.$where_status.' ORDER BY p.tgl_pengajuan ASC';
+			WHERE '.$where_status.' ORDER BY p.status, p.tgl_pengajuan ASC';
 		return $this->db->query($sql)->result_array();
 	}
 	function get_jumlah($id_lembaga, $id_pengajuan = 0, $where_status = 'status>1'){
@@ -18,11 +18,21 @@ class M_pengajuan extends CI_Model {
 		return $this->db->query($sql)->num_rows();		
 	}
 	
+	function get_jumlah_diajukan(){
+		$sql='select id from tbl_pengajuan where status=2';
+		return $this->db->query($sql)->num_rows();		
+	}
+	
+	function get_detil($id, $field){
+		return $this->db->get_where('tbl_pengajuan', 'id='.$id)->row($field);
+	}
+	
 	function get_by_id($id){
 		return $this->db->get_where('tbl_pengajuan', 'id='.$id)->result_array();
 	}
 	
 	function get_by_user($id_user){
+		$sql='select * from tbl_pengajuan where id_user='.$id_user.' order by status, tgl_pengajuan';
 		return $this->db->get_where('tbl_pengajuan', 'id_user='.$id_user)->result_array();
 	}
 
@@ -59,10 +69,15 @@ class M_pengajuan extends CI_Model {
 		$arr_data=array(
 			'status' 		=> 2,
 			'tgl_pengajuan'	=> date('Y-m-d H:i:s'),
+			'bln_pengajuan'	=> date('m'),
+			'thn_pengajuan'	=> date('Y'),
 			'keterangan' 	=> '-'
 		);
 		$arr_where=array('id' => $id);
-		return $this->db->update('tbl_pengajuan', $arr_data, $arr_where);
+		if($this->db->update('tbl_pengajuan', $arr_data, $arr_where)){
+			$this->session->set_flashdata('pengajuan_sukses', TRUE);
+			return(TRUE);
+		}
 	}
 
 	function get_persyaratan($id_jenis_lembaga, $id_jenis_pengajuan){

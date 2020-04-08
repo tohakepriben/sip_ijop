@@ -16,14 +16,14 @@ class Download extends CI_Controller {
 			$file = $file.'persyaratan/'.$id_user.'/'.$id_pengajuan;
 			$file = $file.'/'.$this->input->get('file');
 		}elseif($kind=='instrumen'){
-			$lembaga = $this->input->get('lembaga');
+			$lembaga = $this->input->get('id_jenis_lembaga');
 			$file = $file.'instrumen/'.$lembaga.'/'.$this->input->get('file');			
 		}
 		
 		if(file_exists($file)){
 			force_download($file, NULL);			
 		}else{
-			show_alert('Error: File tidak ditemukan');
+			show_alert('Error: File tidak ditemukan'.$file);
 		}
 	}
 }

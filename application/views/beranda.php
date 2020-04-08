@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header" style="margin-top: 10px;"><?=$title?></h1>
+            <h2 class="page-header" style="margin-top: 10px; font-family: 'Ubuntu', sans-serif;"><?=$title?></h2>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -84,28 +84,33 @@
                         </span>
 
 						<figcaption>
-							<strong>H. Akrom Jangka Daosat</strong>
-							<p class="small text-info">Kasi PD Pontren Brebes</p>
+							<p></p>
 						</figcaption>
 						
 					</figure>
 					</div>
+
+                	<h3 style="margin-top: 10px">Assalamu'alaikum Wr. Wb.</h3>
+					<p>Segala Puji bagi Allah Swt. yang telah memberikan nikmat Iman, Islam dan Ihsan kepada kita semua.</p>
+					<p>Sholawat serta salam semoga selalu tercurahkan kehadiran Nabi Muhammad Saw.</p>
+					<p>Pertama-tama kami ingin menyampaikan  terima kasih kepada:</p>
+					<ol>
+						<li>Kepala Kantor Kementerian Agama Kabupaten Brebes yang telah membimbing selama ini terutama saat PKP angkatan ke XXVI</li>
+						<li>Seluruh stakeholder baik internal maupun eksternal</li>
+						<li>Juga Tim IT baik internal maupun external.</li>
+						<li>Tim efektif yang selalu mendampingi.</li>
+					</ol>
+					<p>Aplikasi SIP IJOP merupakan aksi perubahan menuju peningkatan pelayanan sekaligus mempermudah pelayanan Ijin Operasional (IJOP) di Seksi PD Pontren Kankemenag Kab.Brebes </p>
+					<p>SIP IJOP ini sebagai pusat informasi pelayanan di Seksi PD Pontren Kantor Kementerian Agama Kabupaten Brebes.</p>
+					<p>Sistem layanan  ini merupakan program berbasis website yang dirintis untuk mengembangkan secara mandiri namun terintegrasi Layanan yang berbasisOnline.</p>
+					<p>Melalui layanan Online ini, diharapkan menjadi lebih mudah dan cepat karena masyarakat dalam hal ini TPQ, MADIN dan PONPES bisa mengajukan Ijop tetap dari domisili masing-masing. Salah satu sisi manfaat program ini, akan diperoleh data yang akurat. Dengan layanan SIP IJOP Online ini Kankemenag melibatkan secara langsung MDTA/TPQ/PONPES dalam proses peningkatan pelayanan. </p>
+					<p>Mari kita bangun bersama peningkatan mutu MDTA/TPQ/PONPES dengan pemanfaatan Teknologi Informasi terkini yang lebih cepat, mudah, akurat, akuntabel dan berkesinambungan.terima kasih</p>
+					<p><strong>Wassalamu’alaikum Wr.Wb.</strong></p>
                     <div class="small text-primary">
                         Brebes, Sabtu 28 Maret 2020
                     </div>
-
-                	<h3 style="margin-top: 10px">Assalamu'alaikum Wr. Wb.</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur sita adipiscing elit. Proin molestie accumsan orci suneget placerat. Etiama faucibuss orci quis posuere vestibulu. Ut id purusos ultricies, dictumax quam id, ullamcorper urna. Curabitur sitdown nisi vitae nisi vestotana vestibul ut non massa. Aliquam erat volutpat. Morbi nect nunc et orci euismode finibus. Donec lobortis venenatis turpis. Aenean act congue arcu, nect porttitor magna. Nam consequa ligula nibh, in maximus gravida. Vivamus nuornare masa. Quisque sed honcus leo, ullamcorper auctor mi. Maecenas mollis purus, mattis nisl condimentum. Nam eros elementu, congue diam imperdiet, interdum tellus.</p>
-
-                    <p>Mauris dapibus turpis vel ialis tempor. Morbi turpis leon, pulvinar vitae convallis vitae, scelerisque necto eros. Suspendisse vitae pharetra risus. Pellentesque varius, felis in lacinia faucibus, ipsum liula aliquam nulla, non honcus nunc ipsum eu risus. Nunc finibus euismod magna sagittis. Sed dictum libero consectetur.</p>
-
-                    <ul>
-                        <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Duis blandit maximus tellus, sagittis volutpat tellus sandi.</li>
-                        <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Etiam vel auctor elit. Usaceros suscipit, lobortis felis non.</li>
-                        <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Integer sagittis finibus nequer, euster tincidunt misult.</li>
-                        <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Pellentesque euismod semeget diam ege</li>
-                    </ul>
-                    <p>Aliquam venenatis dui elit, et viverra mi maximus quis. Etiam vel auctor elit. Ut ac eros suscipit, lobortis felison, vulputate tellus. Suspendisse hendrerit aliquet lectus.</p>
+					<p>Kasi PD Pontren Kab.Brebes</p>
+					<p class="text-capitalize">H. Akrom Jangka Daosat</p>
                 
                 </div>
                 <!-- /.panel-body -->
@@ -117,12 +122,7 @@
                     <i class="fa fa-bar-chart-o fa-fw"></i> Grafik Pengajuan Perbulan
                 </div>
                 <div class="panel-body">
-					<div class="progress" id="loading-chart1">
-						<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" 
-						style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Memuat data</strong>
-						</div>
-					</div>                                    	
-                    <canvas id="chart-bar-jumlah" height="200"></canvas>
+                    <canvas id="chart-bar-jumlah" height="170"></canvas>
                 </div>
             </div>
 			
@@ -131,12 +131,7 @@
                     <i class="fa fa-bar-chart-o fa-fw"></i> Grafik Prosentase Jumlah
                 </div>
                 <div class="panel-body">
-					<div class="progress" id="loading-chart2">
-						<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" 
-						style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><strong>Memuat data</strong>
-						</div>
-					</div>                                    	
-                    <canvas id="chart-pie-prosentase" height="250"></canvas>
+                    <canvas id="chart-pie-prosentase" height="230"></canvas>
                 </div>
             </div>            
 		</div>
@@ -158,7 +153,7 @@
 	    }, 
 		options: {plugins: {datalabels: {color: '#fff'}}}
 	});
-
+	
 	$.post('<?=base_url("api/get_bln_pengajuan")?>',
 		function(data){
 			$.each(JSON.parse(data), function(){
@@ -184,7 +179,6 @@
 					}
 				);
             });
-			$('#loading-chart1').remove();
 		}
 	);
 
@@ -246,7 +240,6 @@
 					);
 				}
 			);
-			$('#loading-chart2').remove();
 		}
 	);
 	

@@ -18,9 +18,19 @@
             </li>
             <?php endif; ?>
 
-            <?php if($this->session->userdata('level')==1): ?>
+            <?php 
+            if($this->session->userdata('level')==1): 
+            $jml_diajukan = $this->m_pengajuan->get_jumlah_diajukan();
+            ?>
             <li>
-                <a href="<?=base_url('admin/data_pengajuan')?>"><i class="fa fa-list fa-fw"></i> Data Pengajuan</a>
+                <a href="<?=base_url('admin/approval')?>"><i class="fa fa-ticket fa-fw"></i> Approval Pengajuan 
+                	<?php if($jml_diajukan>0): ?>
+                	<span class="pull-right badge" style="background: orange"><?=$jml_diajukan?></span>
+                	<?php endif; ?>
+                </a>
+            </li>
+            <li>
+                <a href="<?=base_url('admin/pengajuan_diterima')?>"><i class="fa fa-archive fa-fw"></i> Pengajuan Diterima</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Pengaturan<span class="fa arrow"></span></a>
